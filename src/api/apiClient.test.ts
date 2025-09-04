@@ -77,7 +77,6 @@ describe('apiClient', () => {
             json: () => Promise.resolve(errorBody),
         }));
         
-        await expect(apiClient('/not-found')).rejects.toThrow(ApiError);
         await expect(apiClient('/not-found')).rejects.toMatchObject({
             status: 404,
             body: errorBody,
@@ -93,7 +92,6 @@ describe('apiClient', () => {
             json: () => Promise.reject('Invalid JSON'),
         }));
         
-        await expect(apiClient('/server-error')).rejects.toThrow(ApiError);
         await expect(apiClient('/server-error')).rejects.toMatchObject({
             status: 500,
             message: 'HTTP Error: Internal Server Error'

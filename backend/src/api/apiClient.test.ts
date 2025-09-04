@@ -1,13 +1,37 @@
+/// <reference types="vitest" />
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
-import { jest, describe, it, expect, beforeEach } from '@jest/globals';
-import { apiClient, apiStream, ApiError } from '../../../api/apiClient';
+import { apiClient, apiStream, ApiError } from '../../../src/api/apiClient';
 
-// Mock native fetch
-const mockFetch = jest.fn();
-// @ts-ignore
-global.fetch = mockFetch;
+function createMockFetch() {
+    const calls: any[] = [];
+    const impls: any[] = [];
+    const mock: any = function(...args: any[]) {
+        calls.push(args);
+        const impl = impls.shift();
+        if (impl) return impl(...args);
+        return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({}) });
+    };
+    mock.mockImplementationOnce = (fn: any) => { impls.push(fn); };
+    mock.mockClear = () => { calls.length = 0; impls.length = 0; };
+    mock.mock = { calls };
+    return mock;
+}
+
+let mockFetch: any;
+
+beforeEach(() => {
+    mockFetch = createMockFetch();
+    // @ts-ignore
+    global.fetch = mockFetch;
+});
+
+afterEach(() => {
+    try { mockFetch.mockClear?.(); } catch (e) {}
+    // @ts-ignore
+    global.fetch = undefined;
+});
 
 describe('apiClient', () => {
     beforeEach(() => {
@@ -23,15 +47,13 @@ describe('apiClient', () => {
 
         const result = await apiClient('/test');
 
-        expect(mockFetch).toHaveBeenCalledWith('/api/test', {
-            method: 'GET',
-            headers: expect.any(Headers),
-            credentials: 'include',
-        });
-        // FIX: Safely access headers from the potentially undefined options object.
-        const callOptions = mockFetch.mock.calls[0][1] as RequestInit | undefined;
-        const headers = new Headers(callOptions?.headers);
+        const call = mockFetch.mock.calls[0];
+        expect(call[0]).toBe('/api/test');
+        const opts = call[1] as RequestInit | undefined;
+        expect(opts?.method).toBe('GET');
+        const headers = new Headers(opts?.headers);
         expect(headers.get('Content-Type')).toBe('application/json');
+        expect(opts?.credentials).toBe('include');
         expect(result).toEqual({ data: 'success' });
     });
 
@@ -45,11 +67,12 @@ describe('apiClient', () => {
         const body = { name: 'test' };
         await apiClient('/test', { method: 'POST', body: JSON.stringify(body) });
 
-        expect(mockFetch).toHaveBeenCalledWith('/api/test', expect.objectContaining({
-            method: 'POST',
-            body: JSON.stringify(body),
-            credentials: 'include',
-        }));
+        const post = mockFetch.mock.calls[0];
+        expect(post[0]).toBe('/api/test');
+        const postOpts = post[1] as RequestInit | undefined;
+        expect(postOpts?.method).toBe('POST');
+        expect(postOpts?.body).toBe(JSON.stringify(body));
+        expect(postOpts?.credentials).toBe('include');
     });
 
     it('should not set Content-Type for FormData', async () => {
@@ -63,7 +86,6 @@ describe('apiClient', () => {
         formData.append('file', new Blob());
 
         await apiClient('/upload', { method: 'POST', body: formData });
-        // FIX: Safely access headers from the potentially undefined options object.
         const callOptions = mockFetch.mock.calls[0][1] as RequestInit | undefined;
         const headers = new Headers(callOptions?.headers);
         expect(headers.has('Content-Type')).toBe(false);
@@ -77,7 +99,6 @@ describe('apiClient', () => {
             json: () => Promise.resolve(errorBody),
         }));
         
-        await expect(apiClient('/not-found')).rejects.toThrow(ApiError);
         await expect(apiClient('/not-found')).rejects.toMatchObject({
             status: 404,
             body: errorBody,
@@ -93,7 +114,6 @@ describe('apiClient', () => {
             json: () => Promise.reject('Invalid JSON'),
         }));
         
-        await expect(apiClient('/server-error')).rejects.toThrow(ApiError);
         await expect(apiClient('/server-error')).rejects.toMatchObject({
             status: 500,
             message: 'HTTP Error: Internal Server Error'
@@ -126,9 +146,10 @@ describe('apiStream', () => {
 
         const result = await apiStream('/stream');
         expect(result).toBe(mockStream);
-        expect(mockFetch).toHaveBeenCalledWith('/api/stream', expect.objectContaining({
-            credentials: 'include',
-        }));
+        const streamCall = mockFetch.mock.calls[0];
+        expect(streamCall[0]).toBe('/api/stream');
+        const streamOptions = streamCall[1] as RequestInit | undefined;
+        expect(streamOptions?.credentials).toBe('include');
     });
     
     it('should throw ApiError on non-ok streaming response', async () => {

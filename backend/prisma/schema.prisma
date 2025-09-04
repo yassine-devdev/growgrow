@@ -1,0 +1,252 @@
+// This is your Prisma schema file.
+// It defines your database models, their fields, and the relations between them.
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// 1. Define the generator for the Prisma Client.
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 2. Define the datasource (your database connection).
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // This loads from the .env file in the backend
+}
+
+// ==============================================================================
+// ENUMS: For defining strict, allowed values for certain fields.
+// ==============================================================================
+
+enum Role {
+  Provider
+  Admin
+  Teacher
+  Student
+  Parent
+  Admissions
+  Individual
+}
+
+enum SchoolType {
+  K_12
+  University
+  Vocational
+  Other
+}
+
+enum Plan {
+  Basic
+  Pro
+  Enterprise
+}
+
+enum Status {
+  Active
+  Inactive
+  Invited
+  Suspended
+}
+
+enum LeadStatus {
+  New
+  Contacted
+  Qualified
+  Disqualified
+}
+
+enum DealStage {
+  Prospecting
+  ProposalSent
+  Negotiation
+  Won
+  Lost
+}
+
+enum InvoiceStatus {
+  Paid
+  Pending
+  Overdue
+}
+
+// ==============================================================================
+// CORE MODELS: User, School, and Authentication
+// ==============================================================================
+
+model User {
+  id        String @id @default(uuid())
+  email     String @unique
+  username  String @unique
+  name      String
+  lastName  String
+  phone     String?
+  address   String?
+  password  String // Hashed password
+
+  role      Role
+  avatarUrl String?
+
+  schoolId String?
+  school   School? @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  // Authentication
+  authenticators Authenticator[]
+
+  // School Hub Relations (as Teacher)
+  coursesAsTeacher Course[]
+
+  // School Hub Relations (as Student)
+  enrolledCourses Course[] @relation("StudentCourses")
+  submissions     Submission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model School {
+  id     String     @id @unique
+  name   String
+  domain String     @unique
+  type   SchoolType
+  plan   Plan
+  status Status
+
+  users  User[]
+  courses Course[]
+  invoices Invoice[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Model for FIDO2/WebAuthn Biometric Credentials
+model Authenticator {
+  id                    String  @id @default(uuid())
+  credentialID          String  @unique
+  credentialPublicKey   Bytes
+  counter               BigInt
+  credentialDeviceType  String
+  credentialBackedUp    Boolean
+  transports            String? // Comma-separated list of transports
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ==============================================================================
+// SCHOOL HUB MODELS: Academics & Communication
+// ==============================================================================
+
+model Course {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+
+  schoolId    String
+  school      School   @relation(fields: [schoolId], references: [id])
+
+  teacherId   String
+  teacher     User     @relation(fields: [teacherId], references: [id])
+
+  students    User[]   @relation("StudentCourses")
+  assignments Assignment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Assignment {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  dueDate     DateTime
+  maxPoints   Int
+
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id])
+  submissions Submission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Submission {
+  id               String      @id @default(uuid())
+  submittedAt      DateTime    @default(now())
+  submittedText    String?
+  submittedFileUrl String?
+
+  assignmentId     String
+  assignment       Assignment  @relation(fields: [assignmentId], references: [id])
+
+  studentId        String
+  student          User        @relation(fields: [studentId], references: [id])
+
+  grade            Grade?
+}
+
+model Grade {
+  id           String     @id @default(uuid())
+  score        Int
+  feedback     String?
+
+  submissionId String     @unique
+  submission   Submission @relation(fields: [submissionId], references: [id])
+
+  createdAt    DateTime   @default(now())
+}
+
+// ==============================================================================
+// PROVIDER-SPECIFIC MODELS: CRM, HRM, Billing
+// ==============================================================================
+
+// --- CRM ---
+model Lead {
+  id             String     @id @default(uuid())
+  companyName    String
+  contactName    String
+  status         LeadStatus
+  source         String
+  estimatedValue Float
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Deal {
+  id        String    @id @default(uuid())
+  name      String
+  stage     DealStage
+  value     Float
+  closeDate DateTime
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// --- HRM ---
+model HrmRole {
+  id          String       @id @default(uuid())
+  name        String       @unique
+  description String?
+  permissions Permission[] @relation("RolePermissions")
+}
+
+model Permission {
+  id          String    @id
+  name        String
+  description String
+  category    String
+  roles       HrmRole[] @relation("RolePermissions")
+}
+
+// --- Billing ---
+model Invoice {
+  id          String        @id @default(uuid())
+  amount      Float
+  date        DateTime
+  dueDate     DateTime
+  status      InvoiceStatus
+
+  schoolId    String
+  school      School        @relation(fields: [schoolId], references: [id])
+}
+
+// Many-to-many relations use implicit join tables created by Prisma.

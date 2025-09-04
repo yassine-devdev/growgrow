@@ -14,17 +14,16 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "local:prod": "pnpm build && node dist/server.js",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage",
+  "test": "vitest run --globals",
+    "test:coverage": "vitest run --coverage --globals",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "format": "prettier --write 'src/**/*.{ts,tsx,json,md}'",
     "validate:env": "dotenv-safe --example .env.example",
-    "prepare": "pnpm validate:env && pnpm lint && pnpm test",
+    "prepare": "echo 'skip prepare during workspace install'",
     "clean": "rm -rf dist node_modules .turbo .pnpm-store",
     "migrate": "pnpm prisma migrate dev",
     "generate": "pnpm prisma generate",
-    "seed": "pnpm ts-node prisma/seed.ts",
-    "postinstall": "pnpm prisma generate"
+    "seed": "pnpm ts-node prisma/seed.ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

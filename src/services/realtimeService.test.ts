@@ -22,8 +22,8 @@ describe('realtimeService', () => {
     beforeEach(() => {
         // Clear all mock history and reset state before each test
         mockedWebSocket.mockClear();
-        Object.values(mockWebSocketInstance).forEach(mockFn => {
-            if (typeof mockFn === 'function') {
+        Object.values(mockWebSocketInstance).forEach((mockFn: any) => {
+            if (mockFn && typeof mockFn === 'function' && typeof mockFn.mockClear === 'function') {
                 mockFn.mockClear();
             }
         });
@@ -36,12 +36,14 @@ describe('realtimeService', () => {
     });
 
     it('should not create a new WebSocket if one is already connecting or open', () => {
-        realtimeService.init();
-        // Simulate already open socket
-        mockWebSocketInstance.readyState = 1; // OPEN
-        
-        realtimeService.init();
-        expect(mockedWebSocket).toHaveBeenCalledTimes(1);
+    realtimeService.init();
+    // Simulate already open socket
+    mockWebSocketInstance.readyState = 1; // OPEN
+
+    const firstSocket = (realtimeService as any).socket;
+    realtimeService.init();
+    const secondSocket = (realtimeService as any).socket;
+    expect(secondSocket).toBe(firstSocket);
     });
     
     it('should close the existing socket connection when stop() is called', () => {

@@ -1,33 +1,37 @@
-# The Ceremonial Scroll for the Gemini Universe
-
-This scroll provides the official guidelines for interacting with the Google Gemini API within the GROW YouR NEED ecosystem. All backend AI services must adhere to these principles to ensure security, performance, and maintainability.
-
----
-
-## 📜 Core Principle: The Backend is the Sanctum
-
-**The Google Gemini API key (`API_KEY`) MUST NEVER be exposed on the frontend.**
-
-This is the most sacred rule. All interactions with the Gemini API must be proxied through our dedicated backend service, the **AI Multiverse Gateway**. The frontend makes requests to our internal API endpoints (e.g., `/api/concierge/chat`), and the backend securely manages the API key and communicates with Google's servers.
-
--   **Reference**: [AI Backend Architecture](../../docs/backend_ai.md)
-
----
-
-## 🔑 The Gateway's Will: The Source of Truth
-
-The **`model-router.service.ts`** in the backend is the single source of truth for *which* model to use for a given task. Developers should not hardcode model names in their feature logic. Instead, call a higher-level service (like `aiGatewayService`) that uses the router to select the optimal model based on performance, cost, and quality requirements.
-
----
-
-## 🤖 Initiating the Connection (Backend Only)
-
-### Correct Initialization
-
-Always initialize the `GoogleGenAI` client within the backend services as follows, retrieving the key from our centralized config.
-
-```typescript
-import { GoogleGenAI } from "@google/genai";
-import config from '../../config'; // Your project's config file
-
-const ai = new GoogleGenAI({ apiKey: config.apiKey });
+{
+  "instruction": "Rewrite every file in this full-stack project—frontend and backend—to be fully executable in a real-world production environment. Eliminate all use of null, undefined, any, unknown, void, scaffold, placeholder, mock, or incomplete constructs. Ensure all modules, imports, functions, and folders are defined, real, and operational. The goal is not just to remove errors, but to ensure the entire system runs with complete logic, secure flows, and production-grade architecture.",
+  "goal": "Transform the entire codebase into a production-ready system with real authentication, secure password handling, complete logout flows, consistent TypeScript configurations, and fully documented modules. Resolve all known issues and ensure the system is deployable without ceremony or scaffolding.",
+  "issuesToResolve": [
+    "Replace mock authentication with a secure, real-world auth system (e.g., JWT, OAuth, or session-based)",
+    "Implement password hashing and validation using a secure library like bcrypt",
+    "Complete logout functionality with proper token/session invalidation",
+    "Fix all TypeScript type errors and enforce strict typing across the codebase",
+    "Remove hardcoded URLs and replace with environment-based config variables",
+    "Increase backend test coverage with real unit and integration tests",
+    "Unify TypeScript configurations across frontend and backend",
+    "Remove redundant dependencies and optimize package.json",
+    "Add clear, complete documentation for all modules, services, and components"
+  ],
+  "projectScope": {
+    "frontend": {
+      "framework": "React + Vite",
+      "language": "TypeScript",
+      "goals": [
+        "Real authentication UI with secure form validation",
+        "No dummy components or placeholder screens",
+        "Environment-based API calls with fallback logic",
+        "Consistent styling and layout across all pages"
+      ]
+    },
+    "backend": {
+      "framework": "Node.js + Express + Prisma",
+      "language": "TypeScript",
+      "goals": [
+        "Secure API endpoints with real auth middleware",
+        "Validated request/response schemas",
+        "Centralized config and model routing",
+        "Real database models and seed logic"
+      ]
+    }
+  }
+}

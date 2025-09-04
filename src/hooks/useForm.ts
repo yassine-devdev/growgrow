@@ -38,11 +38,17 @@ export const useForm = <T extends object>(
      * Supports nested state objects (e.g., `name="section.field"`) and checkbox inputs.
      */
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        const { name, value, type } = e.target;
+        const { name, value, type } = e.target as any;
         
         let processedValue: string | boolean = value;
-        if (type === 'checkbox' && e.target instanceof HTMLInputElement) {
-            processedValue = e.target.checked;
+        if (type === 'checkbox') {
+            // Some test environments mock events and may provide 'checked' or string 'on'.
+            const targetAny: any = e.target;
+            if (typeof targetAny.checked === 'boolean') {
+                processedValue = targetAny.checked;
+            } else if (value === 'on' || value === 'off') {
+                processedValue = value === 'on';
+            }
         }
 
         const nameParts = name.split('.');
