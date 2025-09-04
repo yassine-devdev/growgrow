@@ -1,0 +1,42 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'brand-bg': '#f7f8fa', // A very light gray, almost white
+          'brand-surface': '#ffffff', // Pure white for cards and surfaces
+          'brand-surface-alt': '#f0f2f5', // A slightly darker gray for secondary surfaces
+          'brand-border': '#e5e7eb', // A light gray for borders
+          'brand-text': '#111827', // A dark gray for main text
+          'brand-text-alt': '#6b7280', // A lighter gray for secondary text
+          'brand-primary': '#4f46e5',
+          'brand-primary-hover': '#6366f1',
+          'brand-accent': '#34d399',
+        },
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+        },
+        boxShadow: {
+          'glow': '0 0 15px 0 rgba(79, 70, 229, 0.5)',
+        }
+      }
+    }
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Add global styles for storybook body */
+  body {
+    background-color: #f7f8fa; /* brand-bg */
+    font-family: 'Inter', sans-serif;
+  }
+  /* A11y: Add a highly visible focus ring for keyboard navigation */
+  *:focus-visible {
+    outline: 3px solid #6366f1 !important;
+    outline-offset: 2px !important;
+    border-radius: 4px;
+  }
+</style>

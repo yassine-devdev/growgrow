@@ -1,0 +1,443 @@
+
+{
+  "login": {
+    "title": "GROW YouR NEED",
+    "subtitle": "Seleccione su rol para ingresar a la Super App"
+  },
+  "roles": {
+    "provider": "Proveedor",
+    "admin": "Administrador",
+    "teacher": "Profesor",
+    "student": "Estudiante",
+    "parent": "Padre",
+    "admissions": "Admisiones",
+    "individual": "Individual"
+  },
+  "footer": {
+    "launcher": {
+      "open": "Abrir Aplicaciones",
+      "openGrid": "Abrir Rejilla de Apps"
+    },
+    "logout": "Cerrar Sesión",
+    "language": "Idioma",
+    "restore": "Restaurar {{app}}"
+  },
+  "overlayWindow": {
+    "minimize": "Minimizar {{title}}",
+    "maximize": "Maximizar {{title}}",
+    "restore": "Restaurar {{title}}",
+    "close": "Cerrar {{title}}"
+  },
+  "datatable": {
+    "search": "Buscar...",
+    "searchPlaceholder": "Buscar registros...",
+    "noResults": "No se encontraron resultados.",
+    "pageInfo": "Página {{currentPage}} de {{totalPages}}"
+  },
+  "views": {
+    "adminsManager": {
+      "title": "Gestionar Administradores",
+      "addAdmin": "Añadir Admin"
+    },
+    "teachersManager": {
+      "title": "Gestionar Profesores",
+      "addTeacher": "Añadir Profesor"
+    },
+    "studentsManager": {
+      "title": "Gestionar Estudiantes",
+      "addStudent": "Añadir Estudiante"
+    },
+    "parentsManager": {
+      "title": "Gestionar Padres",
+      "addParent": "Añadir Padre"
+    },
+    "invoicesManager": {
+      "title": "Gestionar Facturas"
+    },
+    "subscriptionsManager": {
+      "title": "Gestionar Suscripciones"
+    },
+    "newSchoolForm": {
+      "title": "Incorporar Nueva Escuela",
+      "schoolInfo": "Información de la Escuela",
+      "adminInfo": "Cuenta de Administrador Inicial",
+      "submitButton": "Crear Escuela",
+      "submitButtonTreatment": "¡Vamos! ->",
+      "submittingButton": "Creando Escuela..."
+    },
+     "adminFormModal": {
+      "addTitle": "Añadir Nuevo Administrador",
+      "editTitle": "Editar Administrador",
+      "nameLabel": "Nombre completo",
+      "emailLabel": "Correo Electrónico",
+      "schoolLabel": "Escuela",
+      "statusLabel": "Estado",
+      "addButton": "Añadir Administrador",
+      "saveButton": "Guardar Cambios",
+      "savingButton": "Guardando..."
+    },
+    "brandingManager": {
+      "title": "Configuración de Marca"
+    },
+    "domainsManager": {
+      "title": "Gestionar Dominios",
+      "addButton": "Añadir Dominio"
+    },
+    "themesManager": {
+      "title": "Aplicar un Tema",
+      "applyButton": "Aplicar Tema",
+      "appliedButton": "Aplicado"
+    },
+    "ticketsManager": {
+      "title": "Tickets de Soporte"
+    },
+    "kbAnalytics": {
+      "title": "Análisis de Knowledge Base"
+    },
+    "concierge": {
+      "placeholder": "Pregúntale al Conserje de IA...",
+      "newChat": "Nuevo Chat"
+    },
+    "assignmentView": {
+      "title": "Detalles de la Tarea",
+      "course": "Curso",
+      "dueDate": "Fecha de Entrega",
+      "instructions": "Instrucciones",
+      "yourSubmission": "Tu Entrega",
+      "status": "Estado",
+      "statusNotSubmitted": "No Entregado",
+      "statusSubmittedOn": "Entregado el {{date}}",
+      "submittedText": "Texto Entregado",
+      "submittedFile": "Archivo Entregado",
+      "submitWork": "Entregar Tu Trabajo",
+      "textResponsePlaceholder": "Escribe tu respuesta aquí...",
+      "fileUploadLabel": "Adjuntar un archivo (opcional)",
+      "submitButton": "Entregar Tarea",
+      "submittingButton": "Entregando...",
+      "updateButton": "Actualizar Entrega"
+    },
+    "providerProfile": {
+      "title": "Perfil del Proveedor",
+      "companyInfo": "Información de la Empresa",
+      "companyNameLabel": "Nombre de la Empresa",
+      "contactEmailLabel": "Email de Contacto Principal",
+      "websiteLabel": "Sitio Web de la Empresa",
+      "saveButton": "Guardar Perfil",
+      "savingButton": "Guardando..."
+    },
+    "dataConnectorForm": {
+        "aiConfirmTitle": "¿Usar Asistente de IA?",
+        "aiConfirmDescription": "Para conectores como Google Analytics y Stripe, podemos usar IA para sugerir automáticamente mapeos para campos comunes. ¿Desea proceder al paso de mapeo con IA?",
+        "aiConfirmButton": "Sí, usar IA",
+        "aiSkipButton": "No, omitir por ahora"
+    },
+    "admissionsDashboard": {
+      "title": "Tablero de Admisiones",
+      "applicationTrends": "Tendencias de Solicitudes"
+    },
+     "financeTools": {
+        "invoiceForm": {
+            "addTitle": "Añadir Nueva Factura",
+            "editTitle": "Editar Factura",
+            "schoolLabel": "Escuela/Cliente",
+            "amountLabel": "Importe ($)",
+            "dateLabel": "Fecha de Factura",
+            "dueDateLabel": "Fecha de Vencimiento",
+            "statusLabel": "Estado",
+            "addButton": "Añadir Factura",
+            "saveButton": "Guardar Cambios"
+        },
+        "expenseForm": {
+            "addTitle": "Añadir Nuevo Gasto",
+            "editTitle": "Editar Gasto",
+            "dateLabel": "Fecha",
+            "categoryLabel": "Categoría",
+            "amountLabel": "Importe ($)",
+            "descriptionLabel": "Descripción",
+            "addButton": "Añadir Gasto",
+            "saveButton": "Guardar Cambios",
+            "recurringLabel": "Gasto Recurrente",
+            "recurringDescription": "Establecer este gasto para que se repita automáticamente.",
+            "repeatsLabel": "Se repite",
+            "endDateLabel": "Fecha de Finalización (Opcional)"
+        }
+    },
+    "versionControl": {
+      "title": "Control de Versiones",
+      "commitHistory": "Historial de Commits",
+      "generateReleaseNotes": "Generar Notas de Versión desde Commits",
+      "generating": "Generando...",
+      "releaseNotesPlaceholder": "Seleccione commits para generar notas...",
+      "aiGeneratedNotes": "Notas de Versión Generadas por IA",
+      "noCommits": "No hay commits seleccionados."
+    },
+    "changelog": {
+      "title": "Registro de Cambios del Producto",
+      "aiEditorTitle": "Editor de Notas de Versión con IA",
+      "notesPlaceholder": "Introduzca las notas de la versión aquí...",
+      "summarizeButton": "Resumir con IA",
+      "summarizing": "Resumiendo...",
+      "aiSummaryTitle": "Resumen Generado por IA (Editable)",
+      "aiSummaryPlaceholder": "El resumen de la IA aparecerá aquí..."
+    },
+    "lessonPlanner": {
+      "title": "Planificador de Lecciones",
+      "newPlan": "Nuevo Plan",
+      "noPlansTitle": "No Hay Planes de Lección",
+      "noPlansDescription": "Crea tu primer plan de lección para comenzar.",
+      "editorTitle": "Editor de Planes de Lección",
+      "planTitleLabel": "Título del Plan",
+      "courseLabel": "Curso",
+      "dateLabel": "Fecha",
+      "objectivesLabel": "Objetivos de Aprendizaje",
+      "materialsLabel": "Materiales y Recursos",
+      "activitiesLabel": "Actividades y Procedimientos",
+      "saveButton": "Guardar Plan",
+      "deleteButton": "Eliminar Plan",
+      "aiAssistantButton": "Asistente de IA",
+      "aiModalTitle": "Asistente de IA para Planes de Lección",
+      "aiTopicLabel": "Tema de la Lección",
+      "aiObjectiveLabel": "Objetivo Principal de Aprendizaje",
+      "aiGenerateButton": "Generar Borrador",
+      "aiGenerating": "Generando...",
+      "confirmDelete": "¿Estás seguro de que quieres eliminar este plan de lección?"
+    },
+    "marketingTools": {
+        "campaignsManager": {
+            "title": "Campañas de Marketing",
+            "addCampaign": "Nueva Campaña"
+        },
+        "campaignForm": {
+            "addTitle": "Añadir Nueva Campaña",
+            "nameLabel": "Nombre de la Campaña",
+            "channelLabel": "Canal",
+            "statusLabel": "Estado",
+            "spendLabel": "Gasto ($)",
+            "addButton": "Añadir Campaña"
+        },
+        "analytics": {
+            "title": "Análisis de Marketing",
+            "conversionsByChannel": "Conversiones por Canal"
+        },
+        "aiWorkspace": {
+            "title": "Espacio de Trabajo de IA de Marketing",
+            "subtitle": "Usa la IA para generar y simular tus activos de marketing.",
+            "tabs": {
+                "keywords": "Explorador de Palabras Clave",
+                "subjects": "Asuntos de Email",
+                "adCopy": "Texto de Anuncio",
+                "competitors": "Análisis de Competencia",
+                "simulator": "Simulador de Campaña"
+            }
+        }
+    },
+    "predictiveAnalytics": {
+      "title": "Análisis Predictivo",
+      "ltvForecast": "Previsión del Valor de Vida del Cliente (LTV)",
+      "highRiskChurn": "Usuarios con Alto Riesgo de Abandono",
+      "churnProbability": "Probabilidad de Abandono"
+    },
+    "cohortAnalysis": {
+      "title": "Análisis de Cohortes: Retención de Usuarios",
+      "retentionBySignup": "Retención por Mes de Registro",
+      "users": "Usuarios"
+    }
+  },
+  "header": {
+    "tooltips": {
+      "notifications": "Abrir notificaciones",
+      "help": "Abrir centro de ayuda"
+    }
+  },
+  "nav": {
+    "modules": {
+      "dashboard": "Tablero",
+      "schools": "Escuelas",
+      "tools": "Herramientas",
+      "communication": "Comunicación",
+      "concierge": "Conserje",
+      "directories": "Directorios",
+      "system": "Sistema",
+      "school-hub": "Centro Escolar",
+      "comms": "Comunicaciones",
+      "knowledge": "Conocimiento",
+      "personal-hub": "Centro Personal"
+    },
+    "header": {
+      "analytics": "Análisis",
+      "monitoring": "Monitoreo",
+      "onboarding": "Incorporación",
+      "users": "Usuarios",
+      "billing": "Facturación",
+      "planning": "Planificación",
+      "marketing": "Marketing",
+      "finance": "Finanzas",
+      "updates": "Actualizaciones",
+      "collaboration": "Colaboración",
+      "testing-automation": "Pruebas y Automatización",
+      "templates": "Plantillas",
+      "schedule": "Programar",
+      "video-social": "Video y Redes",
+      "technical-help": "Ayuda Técnica",
+      "business-help": "Ayuda de Negocios",
+      "productivity-hub": "Productividad",
+      "ai-governance": "Gobernanza IA",
+      "students": "Estudiantes",
+      "parents": "Padres",
+      "alumni-community": "Exalumnos",
+      "api-keys": "Claves API",
+      "logs": "Registros",
+      "multi-tenancy": "Multi-Tenencia",
+      "bulk-operations": "Operaciones Masivas",
+      "legal-compliance": "Legal",
+      "audit-logs": "Registros de Auditoría"
+    },
+    "subnav": {
+      "usage-stats": "Estadísticas",
+      "revenue-reports": "Ingresos",
+      "active-users": "Usuarios Activos",
+      "growth-trends": "Crecimiento",
+      "predictive-analytics": "Predicciones",
+      "engagement-insights": "Interacción",
+      "churn-retention": "Abandono",
+      "parent-engagement": "Participación Padres",
+      "cohort-analysis": "Cohortes",
+      "system-health": "Salud del Sistema",
+      "incident-response": "Respuesta",
+      "manage-schools": "Gestionar Escuelas",
+      "pay-fees": "Pagar Cuotas",
+      "keyword-explorer": "Palabras Clave",
+      "email-subjects": "Asuntos",
+      "ad-copy": "Textos Anuncio",
+      "competitor-insights": "Competencia",
+      "campaign-simulator": "Simulador",
+      "revenue-dashboard": "Ingresos",
+      "subscription-insights": "Suscripciones",
+      "invoice-manager": "Facturas",
+      "expense-tracker": "Gastos",
+      "forecasting-tool": "Previsión",
+      "budgeting": "Presupuestos",
+      "sales-pipelines": "Ventas",
+      "finance-reports": "Informes",
+      "feature-rollouts": "Lanzamientos",
+      "environment-management": "Entornos",
+      "project-boards": "Proyectos",
+      "documents": "Documentos",
+      "team-chat": "Chat de Equipo",
+      "qa-tools": "QA",
+      "workflow-builder": "Workflows",
+      "test-suites": "Tests",
+      "email-templates": "Email",
+      "notification-templates": "Notificaciones",
+      "template-library": "Biblioteca",
+      "school-chat": "Chat Escolar",
+      "debug-assistant": "Asistente Debug",
+      "log-analyzer": "Analizador Logs",
+      "marketing-planner": "Marketing",
+      "sales-strategy": "Ventas",
+      "meeting-summarizer": "Resumen Reunión",
+      "task-manager": "Tareas",
+      "model-monitoring": "Monitoreo",
+      "ethics-dashboard": "Ética",
+      "all-students": "Todos los Estudiantes",
+      "all-parents": "Todos los Padres",
+      "alumni-directory": "Directorio",
+      "community-groups": "Grupos",
+      "language-settings": "Idiomas",
+      "third-party-apps": "Apps",
+      "key-management": "Gestión",
+      "key-analytics": "Análisis",
+      "system-logs": "Sistema",
+      "recovery-plans": "Recuperación",
+      "tenant-settings": "Ajustes Inquilino",
+      "resource-quotas": "Cuotas",
+      "vector-database": "Base de Vectores",
+      "templates": "Plantillas",
+      "chart-builder": "Creador Gráficos",
+      "report-generator": "Creador Informes",
+      "data-connectors": "Conectores",
+      "lesson-plans": "Planes de Lección",
+      "campaigns": "Campañas",
+      "analytics": "Análisis",
+      "ai-workspace": "Espacio de IA"
+    }
+  },
+  "apps": {
+    "studio": "Estudio",
+    "media": "Medios",
+    "gamification": "Gamificación",
+    "leisure": "Ocio",
+    "market": "Mercado",
+    "lifestyle": "Estilo de Vida",
+    "hobbies": "Pasatiempos",
+    "knowledge": "Conocimiento",
+    "sports": "Deportes",
+    "religion": "Religión",
+    "sudoku": "Sudoku",
+    "services": "Servicios",
+    "help": "Ayuda",
+    "finance": "Finanzas",
+    "placeholder": {
+      "title": "Próximamente",
+      "description": "Esta aplicación está en construcción. ¡Vuelve pronto para ver nuevas funciones emocionantes!"
+    }
+  },
+  "sudoku": {
+    "title": "Sudoku",
+    "selectDifficulty": "Selecciona una Dificultad",
+    "easy": "Fácil",
+    "medium": "Medio",
+    "hard": "Difícil",
+    "newGame": "Nuevo Juego",
+    "check": "Verificar",
+    "solve": "Resolver",
+    "unsolved": "El tablero no está resuelto correctamente.",
+    "solved": "¡Felicidades! ¡Has resuelto el puzzle!",
+    "confirmNewGame": "¿Seguro que quieres empezar un juego nuevo? Perderás tu progreso actual."
+  },
+  "emptyState": {
+    "selectModule": "Seleccione un módulo para comenzar.",
+    "implementationNeeded": "El módulo [{{module}}] está listo para ser implementado."
+  },
+  "userViews": {
+    "provider": "Vista de Proveedor",
+    "admin": "Vista de Administrador",
+    "teacher": "Vista de Profesor",
+    "student": "Vista de Estudiante",
+    "parent": "Vista de Padre",
+    "admissions": "Vista de Admisiones",
+    "individual": "Vista Individual"
+  },
+  "dataEmptyState": {
+    "noTickets": {
+      "title": "Aún no hay tickets de soporte",
+      "description": "Cuando los usuarios envíen tickets de soporte, aparecerán aquí en la columna 'Nuevo'."
+    },
+    "noCampaigns": {
+      "title": "No se han creado campañas",
+      "description": "Inicia tu primera campaña de marketing para seguir el rendimiento y la participación.",
+      "action": "Nueva Campaña"
+    }
+  },
+  "teacherDashboard": {
+    "noAssignments": {
+      "title": "¡Todo al día!",
+      "description": "No hay tareas para calificar."
+    }
+  },
+  "studentDashboard": {
+    "noTasks": {
+      "title": "No hay tareas próximas",
+      "description": "No tienes tareas pendientes pronto."
+    },
+    "wellnessCard": {
+      "title": "Registro de Bienestar",
+      "prompt": "¿Cómo te sientes hoy?",
+      "happy": "Feliz",
+      "neutral": "Normal",
+      "sad": "Triste",
+      "submitted": "¡Gracias por compartir!",
+      "recentMoods": "Tus Estados de Ánimo Recientes"
+    }
+  }
+}

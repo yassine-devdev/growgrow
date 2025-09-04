@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GROW YouR NEED — SaaS Super App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', // Enable class-based dark mode
+        theme: {
+          extend: {
+            colors: {
+              'brand-bg': '#f7f8fa', // A very light gray, almost white
+              'brand-surface': '#ffffff', // Pure white for cards and surfaces
+              'brand-surface-alt': '#f0f2f5', // A slightly darker gray for secondary surfaces
+              'brand-border': '#e5e7eb', // A light gray for borders
+              'brand-text': '#111827', // A dark gray for main text
+              'brand-text-alt': '#6b7280', // A lighter gray for secondary text
+              'brand-primary': '#4f46e5',
+              'brand-primary-hover': '#6366f1',
+              'brand-accent': '#34d399',
+
+              // Dark theme colors
+              dark: {
+                bg: '#111827',
+                surface: '#1f2937',
+                'surface-alt': '#374151',
+                border: '#4b5563',
+                text: '#f9fafb',
+                'text-alt': '#9ca3af',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            boxShadow: {
+              'glow': '0 0 15px 0 rgba(79, 70, 229, 0.5)',
+            },
+            keyframes: {
+              'fade-in': {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+               'fade-in-down': {
+                '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+               'flash-success': {
+                '0%, 100%': { backgroundColor: 'inherit' },
+                '50%': { backgroundColor: '#a7f3d0' }, /* bg-green-200 */
+              },
+            },
+            animation: {
+              'fade-in': 'fade-in 0.2s ease-out',
+              'fade-in-down': 'fade-in-down 0.3s ease-out forwards',
+              'flash-success': 'flash-success 1s ease-in-out',
+            },
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://esm.sh/react-phone-input-2@2.15.1/lib/style.css" />
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <body class="bg-brand-bg dark:bg-dark-bg">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="importmap">
+{
+  "imports": {
+    "@/": "./",
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.23.1",
+    "lucide-react": "https://esm.sh/lucide-react@0.379.0",
+    "i18next": "https://esm.sh/i18next@23.11.5",
+    "react-i18next": "https://esm.sh/react-i18next@14.1.2",
+    "zod": "https://esm.sh/zod@3.23.8",
+    "zustand": "https://esm.sh/zustand@4.5.2",
+    "zustand/middleware": "https://esm.sh/zustand@4.5.2/middleware",
+    "@tanstack/react-query": "https://esm.sh/@tanstack/react-query@5.37.1",
+    "@tanstack/react-table": "https://esm.sh/@tanstack/react-table@8.17.3",
+    "@tanstack/react-virtual": "https://esm.sh/@tanstack/react-virtual@3.5.0",
+    "recharts": "https://esm.sh/recharts@2.12.7",
+    "react-simple-code-editor": "https://esm.sh/react-simple-code-editor@0.13.1?deps=react@18.2.0",
+    "prismjs": "https://esm.sh/prismjs@1.29.0",
+    "prismjs/": "https://esm.sh/prismjs@1.29.0/",
+    "@google/genai": "https://esm.sh/@google/genai@0.12.0",
+    "@jest/globals": "https://aistudiocdn.com/@jest/globals@^30.1.1",
+    "@testing-library/react": "https://aistudiocdn.com/@testing-library/react@^16.3.0",
+    "@playwright/test": "https://aistudiocdn.com/@playwright/test@^1.55.0",
+    "@storybook/react": "https://aistudiocdn.com/@storybook/react@^9.1.3",
+    "@storybook/test": "https://aistudiocdn.com/@storybook/test@^8.6.14",
+    "zustand/": "https://aistudiocdn.com/zustand@^5.0.8/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "express": "https://aistudiocdn.com/express@^5.1.0",
+    "jsonwebtoken": "https://aistudiocdn.com/jsonwebtoken@^9.0.2",
+    "dotenv": "https://aistudiocdn.com/dotenv@^17.2.1",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "fs/": "https://aistudiocdn.com/fs@^0.0.1-security/",
+    "cors": "https://aistudiocdn.com/cors@^2.8.5",
+    "cookie-parser": "https://aistudiocdn.com/cookie-parser@^1.4.7",
+    "uuid": "https://aistudiocdn.com/uuid@^11.1.0",
+    "process": "https://aistudiocdn.com/process@^0.11.10",
+    "crypto": "https://aistudiocdn.com/crypto@^1.0.1",
+    "redis": "https://aistudiocdn.com/redis@^5.8.2",
+    "@prisma/client": "https://aistudiocdn.com/@prisma/client@^6.15.0",
+    "url": "https://aistudiocdn.com/url@^0.11.4",
+    "react-hook-form": "https://esm.sh/react-hook-form@7.51.5",
+    "yup": "https://esm.sh/yup@1.4.0",
+    "@hookform/resolvers/yup": "https://esm.sh/@hookform/resolvers@3.3.4/yup?deps=yup@1.4.0",
+    "react-phone-input-2": "https://esm.sh/react-phone-input-2@2.15.1?deps=react@18.2.0",
+    "framer-motion": "https://esm.sh/framer-motion@11.2.6",
+    "@simplewebauthn/browser": "https://esm.sh/@simplewebauthn/browser@10.0.0",
+    "@hookform/resolvers/": "https://aistudiocdn.com/@hookform/resolvers@^5.2.1/",
+    "@simplewebauthn/typescript-types": "https://aistudiocdn.com/@simplewebauthn/typescript-types@^8.3.4"
+  }
+}
+</script>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

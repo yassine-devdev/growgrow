@@ -1,0 +1,70 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getProviderSchoolDetails } from '@/api/providerApi';
+import { QUERY_KEYS } from '@/constants/queries';
+import { Loader2 } from 'lucide-react';
+import StatCard from '@/components/ui/StatCard';
+import Skeleton from '@/components/ui/Skeleton';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+
+const SchoolDetailSkeleton: React.FC = () => (
+    <div className="flex flex-col h-full gap-4">
+        <Skeleton className="h-8 w-1/3" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <Skeleton className="h-24" />
+            <Skeleton className="h-24" />
+            <Skeleton className="h-24" />
+            <Skeleton className="h-24" />
+        </div>
+        <Skeleton className="flex-1" />
+    </div>
+);
+
+const ProviderSchoolDetailView: React.FC = () => {
+    const { schoolId } = useParams<{ schoolId: string }>();
+
+    const { data, isLoading } = useQuery({
+        queryKey: QUERY_KEYS.providerSchoolDetails(schoolId!),
+        queryFn: () => getProviderSchoolDetails(schoolId!),
+        enabled: !!schoolId,
+    });
+
+    if (isLoading) {
+        return <SchoolDetailSkeleton />;
+    }
+
+    if (!data) return <div className="text-center p-8">School not found.</div>;
+
+    return (
+        <div className="flex flex-col h-full gap-4">
+            <h1 className="text-2xl font-bold text-brand-text">{data.name} - Detailed View</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {data.stats.map(stat => (
+                    <StatCard key={stat.label} {...stat} />
+                ))}
+            </div>
+            <div className="flex-1 bg-brand-surface border border-brand-border rounded-lg p-4 flex flex-col min-h-[300px]">
+                <h3 className="text-lg font-bold mb-4 text-brand-text">Health Score Over Time</h3>
+                 <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={data.healthHistory} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+                        <defs>
+                            <linearGradient id="colorHealth" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#34d399" stopOpacity={0.8}/>
+                                <stop offset="95%" stopColor="#34d399" stopOpacity={0}/>
+                            </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                        <XAxis dataKey="date" stroke="#6b7280" tick={{fontSize: 12}} />
+                        <YAxis stroke="#6b7280" tick={{fontSize: 12}} domain={[0, 100]}/>
+                        <Tooltip />
+                        <Area type="monotone" dataKey="score" name="Health Score" stroke="#34d399" fill="url(#colorHealth)" />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
+        </div>
+    );
+};
+
+export default ProviderSchoolDetailView;

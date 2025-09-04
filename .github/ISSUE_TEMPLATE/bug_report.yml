@@ -1,0 +1,70 @@
+# .github/ISSUE_TEMPLATE/bug_report.yml
+name: "🐛 Bug Report: The Chaos Detector"
+description: "Catch bugs with clarity and ritual. Help us banish chaos from the codebase."
+title: "[BUG] - <A brief, descriptive title of the bug>"
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to file a bug report! To help us resolve the issue quickly, please provide as much detail as possible.
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: "Describe the Chaos"
+      description: "A clear and concise description of what the bug is. What did you observe that was unexpected?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: "Reproduction Ritual"
+      description: "Step-by-step instructions on how to reproduce the bug. The more precise, the better."
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See the error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "Expected Harmony"
+      description: "What did you expect to happen when performing the steps above?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots-logs
+    attributes:
+      label: "Visual Evidence & Arcane Logs"
+      description: "If applicable, add screenshots, video recordings, or console logs to help explain your problem."
+      render: shell
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Severity"
+      description: "How critical is this bug to your workflow?"
+      options:
+        - "Critical - Blocks core functionality"
+        - "High - Major feature is broken or unusable"
+        - "Medium - Minor feature is broken or has unexpected behavior"
+        - "Low - Visual glitch or cosmetic issue"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: "Ceremonial Confirmation"
+      description: "Please confirm the following before submitting."
+      options:
+        - label: "I have searched the existing issues to ensure this is not a duplicate."
+          required: true
+        - label: "I have provided clear steps to reproduce this bug."
+          required: true

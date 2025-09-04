@@ -1,0 +1,510 @@
+
+{
+  "login": {
+    "title": "GROW YouR NEED",
+    "subtitle": "اختر دورك للدخول إلى التطبيق الخارق"
+  },
+  "roles": {
+    "provider": "مزود",
+    "admin": "مسؤول",
+    "teacher": "معلم",
+    "student": "طالب",
+    "parent": "ولي أمر",
+    "admissions": "قبول",
+    "individual": "فرد"
+  },
+  "footer": {
+    "launcher": {
+      "open": "فتح التطبيقات",
+      "openGrid": "فتح شبكة التطبيقات"
+    },
+    "logout": "تسجيل الخروج",
+    "language": "اللغة",
+    "restore": "استعادة {{app}}"
+  },
+  "overlayWindow": {
+    "minimize": "تصغير {{title}}",
+    "maximize": "تكبير {{title}}",
+    "restore": "استعادة {{title}}",
+    "close": "إغلاق {{title}}"
+  },
+  "datatable": {
+    "search": "بحث...",
+    "searchPlaceholder": "بحث في السجلات...",
+    "noResults": "لم يتم العثور على نتائج.",
+    "pageInfo": "صفحة {{currentPage}} من {{totalPages}}"
+  },
+  "views": {
+    "adminsManager": {
+      "title": "إدارة المسؤولين",
+      "addAdmin": "إضافة مسؤول"
+    },
+    "teachersManager": {
+      "title": "إدارة المعلمين",
+      "addTeacher": "إضافة معلم"
+    },
+    "studentsManager": {
+      "title": "إدارة الطلاب",
+      "addStudent": "إضافة طالب"
+    },
+    "parentsManager": {
+      "title": "إدارة أولياء الأمور",
+      "addParent": "إضافة ولي أمر"
+    },
+    "invoicesManager": {
+      "title": "إدارة الفواتير"
+    },
+    "subscriptionsManager": {
+      "title": "إدارة الاشتراكات"
+    },
+    "newSchoolForm": {
+      "title": "إضافة مدرسة جديدة",
+      "schoolInfo": "معلومات المدرسة",
+      "adminInfo": "حساب المسؤول الأولي",
+      "submitButton": "إنشاء مدرسة",
+      "submitButtonTreatment": "لنبدأ! ->",
+      "submittingButton": "جاري إنشاء المدرسة..."
+    },
+     "adminFormModal": {
+      "addTitle": "إضافة مسؤول جديد",
+      "editTitle": "تعديل مسؤول",
+      "nameLabel": "الاسم الكامل",
+      "emailLabel": "البريد الإلكتروني",
+      "schoolLabel": "المدرسة",
+      "statusLabel": "الحالة",
+      "addButton": "إضافة مسؤول",
+      "saveButton": "حفظ التغييرات",
+      "savingButton": "جاري الحفظ..."
+    },
+    "brandingManager": {
+      "title": "إعدادات العلامة التجارية"
+    },
+    "domainsManager": {
+      "title": "إدارة النطاقات",
+      "addButton": "إضافة نطاق"
+    },
+    "themesManager": {
+      "title": "تطبيق سمة",
+      "applyButton": "تطبيق السمة",
+      "appliedButton": "تم التطبيق"
+    },
+    "ticketsManager": {
+      "title": "تذاكر الدعم"
+    },
+    "kbAnalytics": {
+      "title": "تحليلات قاعدة المعرفة"
+    },
+    "concierge": {
+      "placeholder": "اسأل المساعد الذكي...",
+      "newChat": "دردشة جديدة"
+    },
+    "assignmentView": {
+      "title": "تفاصيل الواجب",
+      "course": "المادة",
+      "dueDate": "تاريخ الاستحقاق",
+      "instructions": "التعليمات",
+      "yourSubmission": "تسليمك",
+      "status": "الحالة",
+      "statusNotSubmitted": "لم يتم التسليم",
+      "statusSubmittedOn": "تم التسليم في {{date}}",
+      "submittedText": "النص المُسلم",
+      "submittedFile": "الملف المُسلم",
+      "submitWork": "تسليم واجبك",
+      "textResponsePlaceholder": "اكتب إجابتك هنا...",
+      "fileUploadLabel": "إرفاق ملف (اختياري)",
+      "submitButton": "تسليم الواجب",
+      "submittingButton": "جاري التسليم...",
+      "updateButton": "تحديث التسليم"
+    },
+    "providerProfile": {
+      "title": "ملف تعريف المزود",
+      "companyInfo": "معلومات الشركة",
+      "companyNameLabel": "اسم الشركة",
+      "contactEmailLabel": "البريد الإلكتروني للاتصال الرئيسي",
+      "websiteLabel": "موقع الشركة",
+      "saveButton": "حفظ الملف الشخصي",
+      "savingButton": "جاري الحفظ..."
+    },
+    "dataConnectorForm": {
+      "aiConfirmTitle": "استخدام مساعد الذكاء الاصطناعي؟",
+      "aiConfirmDescription": "بالنسبة للموصلات مثل Google Analytics و Stripe، يمكننا استخدام الذكاء الاصطناعي لاقتراح تعيينات للحقول الشائعة تلقائيًا. هل ترغب في المتابعة إلى خطوة التعيين بواسطة الذكاء الاصطناعي؟",
+      "aiConfirmButton": "نعم، استخدم الذكاء الاصطناعي",
+      "aiSkipButton": "لا، تخطي الآن"
+    },
+     "admissionsDashboard": {
+      "title": "لوحة تحكم القبول",
+      "applicationTrends": "اتجاهات طلبات التقديم"
+    },
+     "financeTools": {
+        "invoiceForm": {
+            "addTitle": "إضافة فاتورة جديدة",
+            "editTitle": "تعديل الفاتورة",
+            "schoolLabel": "المدرسة/العميل",
+            "amountLabel": "المبلغ ($)",
+            "dateLabel": "تاريخ الفاتورة",
+            "dueDateLabel": "تاريخ الاستحقاق",
+            "statusLabel": "الحالة",
+            "addButton": "إضافة فاتورة",
+            "saveButton": "حفظ التغييرات"
+        },
+        "expenseForm": {
+            "addTitle": "إضافة مصروف جديد",
+            "editTitle": "تعديل المصروف",
+            "dateLabel": "التاريخ",
+            "categoryLabel": "الفئة",
+            "amountLabel": "المبلغ ($)",
+            "descriptionLabel": "الوصف",
+            "addButton": "إضافة مصروف",
+            "saveButton": "حفظ التغييرات",
+            "recurringLabel": "مصروف متكرر",
+            "recurringDescription": "ضبط هذا المصروف ليتكرر تلقائياً.",
+            "repeatsLabel": "التكرار",
+            "endDateLabel": "تاريخ الانتهاء (اختياري)"
+        }
+    },
+    "versionControl": {
+      "title": "التحكم في الإصدار",
+      "commitHistory": "سجل التغييرات",
+      "generateReleaseNotes": "إنشاء ملاحظات الإصدار من التغييرات",
+      "generating": "جاري الإنشاء...",
+      "releaseNotesPlaceholder": "حدد التغييرات لإنشاء الملاحظات...",
+      "aiGeneratedNotes": "ملاحظات الإصدار المنشأة بواسطة الذكاء الاصطناعي",
+      "noCommits": "لم يتم تحديد أي تغييرات."
+    },
+    "changelog": {
+      "title": "سجل تغييرات المنتج",
+      "aiEditorTitle": "محرر ملاحظات الإصدار بالذكاء الاصطناعي",
+      "notesPlaceholder": "أدخل ملاحظات الإصدار هنا...",
+      "summarizeButton": "تلخيص بالذكاء الاصطناعي",
+      "summarizing": "جاري التلخيص...",
+      "aiSummaryTitle": "ملخص من إنشاء الذكاء الاصطناعي (قابل للتعديل)",
+      "aiSummaryPlaceholder": "سيظهر ملخص الذكاء الاصطناعي هنا..."
+    },
+    "lessonPlanner": {
+      "title": "مخطط الدروس",
+      "newPlan": "خطة جديدة",
+      "noPlansTitle": "لا توجد خطط دروس",
+      "noPlansDescription": "أنشئ خطة الدرس الأولى للبدء.",
+      "editorTitle": "محرر خطة الدرس",
+      "planTitleLabel": "عنوان الخطة",
+      "courseLabel": "المادة الدراسية",
+      "dateLabel": "التاريخ",
+      "objectivesLabel": "أهداف التعلم",
+      "materialsLabel": "المواد والمصادر",
+      "activitiesLabel": "الأنشطة والإجراءات",
+      "saveButton": "حفظ الخطة",
+      "deleteButton": "حذف الخطة",
+      "aiAssistantButton": "مساعد الذكاء الاصطناعي",
+      "aiModalTitle": "مساعد الذكاء الاصطناعي لخطط الدروس",
+      "aiTopicLabel": "موضوع الدرس",
+      "aiObjectiveLabel": "الهدف التعليمي الأساسي",
+      "aiGenerateButton": "إنشاء مسودة",
+      "aiGenerating": "جاري الإنشاء...",
+      "confirmDelete": "هل أنت متأكد من رغبتك في حذف خطة الدرس هذه؟"
+    },
+    "marketingTools": {
+        "campaignsManager": {
+            "title": "حملات التسويق",
+            "addCampaign": "حملة جديدة"
+        },
+        "campaignForm": {
+            "addTitle": "إضافة حملة جديدة",
+            "nameLabel": "اسم الحملة",
+            "channelLabel": "القناة",
+            "statusLabel": "الحالة",
+            "spendLabel": "الإنفاق ($)",
+            "addButton": "إضافة حملة"
+        },
+        "analytics": {
+            "title": "تحليلات التسويق",
+            "conversionsByChannel": "التحويلات حسب القناة"
+        },
+        "aiWorkspace": {
+            "title": "مساحة عمل التسويق بالذكاء الاصطناعي",
+            "subtitle": "استخدم الذكاء الاصطناعي لإنشاء ومحاكاة أصولك التسويقية.",
+            "tabs": {
+                "keywords": "مستكشف الكلمات المفتاحية",
+                "subjects": "مواضيع البريد الإلكتروني",
+                "adCopy": "نص الإعلان",
+                "competitors": "رؤى المنافسين",
+                "simulator": "محاكي الحملات"
+            }
+        }
+    },
+    "predictiveAnalytics": {
+      "title": "التحليلات التنبؤية",
+      "ltvForecast": "توقع القيمة الدائمة للعميل (LTV)",
+      "highRiskChurn": "المستخدمون المعرضون لخطر التوقف عن استخدام الخدمة",
+      "churnProbability": "احتمالية التوقف"
+    },
+    "cohortAnalysis": {
+      "title": "تحليل الأفواج: الاحتفاظ بالمستخدمين",
+      "retentionBySignup": "الاحتفاظ حسب شهر التسجيل",
+      "users": "المستخدمون"
+    }
+  },
+  "header": {
+    "tooltips": {
+      "notifications": "فتح الإشعارات",
+      "help": "فتح مركز المساعدة"
+    }
+  },
+  "nav": {
+    "modules": {
+      "dashboard": "لوحة التحكم",
+      "schools": "المدارس",
+      "tools": "الأدوات",
+      "communication": "التواصل",
+      "concierge": "المساعد",
+      "directories": "الأدلة",
+      "system": "النظام",
+      "school-hub": "مركز المدرسة",
+      "comms": "الاتصالات",
+      "knowledge": "المعرفة",
+      "personal-hub": "المركز الشخصي"
+    },
+    "header": {
+      "analytics": "التحليلات",
+      "monitoring": "المراقبة",
+      "onboarding": "الإعداد",
+      "users": "المستخدمون",
+      "billing": "الفواتير",
+      "white-label": "العلامة البيضاء",
+      "support": "الدعم",
+      "marketing": "التسويق",
+      "finance": "المالية",
+      "updates": "التحديثات",
+      "data-studio": "استوديو البيانات",
+      "sandbox": "بيئة الاختبار",
+      "collaboration": "التعاون",
+      "testing-automation": "الاختبار والتشغيل الآلي",
+      "email": "البريد الإلكتروني",
+      "templates": "القوالب",
+      "schedule": "الجدولة",
+      "video-social": "الفيديو والتواصل",
+      "chat": "الدردشة",
+      "technical-help": "مساعدة فنية",
+      "business-help": "مساعدة الأعمال",
+      "productivity-hub": "مركز الإنتاجية",
+      "ai-governance": "حوكمة الذكاء الاصطناعي",
+      "schools": "المدارس",
+      "staff": "الموظفون",
+      "students": "الطلاب",
+      "parents": "أولياء الأمور",
+      "partners": "الشركاء",
+      "alumni-community": "الخريجون والمجتمع",
+      "general": "عام",
+      "security": "الأمان",
+      "integrations": "التكاملات",
+      "api-keys": "مفاتيح API",
+      "logs": "السجلات",
+      "backup": "النسخ الاحتياطي",
+      "multi-tenancy": "التعددية",
+      "bulk-operations": "عمليات جماعية",
+      "legal-compliance": "قانوني",
+      "overview": "نظرة عامة",
+      "academics": "الأكاديميات",
+      "people": "الأشخاص",
+      "planner": "المخطط",
+      "planning": "التخطيط",
+      "messages": "الرسائل",
+      "library": "المكتبة",
+      "ai-assist": "مساعدة الذكاء الاصطناعي",
+      "settings": "الإعدادات",
+      "lifestyle": "أسلوب الحياة",
+      "marketplace": "السوق",
+      "audit-logs": "سجلات التدقيق"
+    },
+    "subnav": {
+      "usage-stats": "إحصاءات الاستخدام",
+      "revenue-reports": "الإيرادات",
+      "active-users": "المستخدمون النشطون",
+      "growth-trends": "اتجاهات النمو",
+      "predictive-analytics": "تنبؤي",
+      "engagement-insights": "تفاعل",
+      "churn-retention": "الاحتفاظ",
+      "parent-engagement": "مشاركة الآباء",
+      "cohort-analysis": "تحليل الأقران",
+      "server-status": "حالة الخادم",
+      "logs": "السجلات",
+      "incidents": "الحوادث",
+      "alerts": "التنبيهات",
+      "system-health": "صحة النظام",
+      "incident-response": "الاستجابة",
+      "manage-schools": "إدارة المدارس",
+      "new-school": "مدرسة جديدة",
+      "docs": "المستندات",
+      "config": "التكوين",
+      "admins": "المسؤولون",
+      "teachers": "المعلمون",
+      "students": "الطلاب",
+      "parents": "أولياء الأمور",
+      "all-parents": "كل أولياء الأمور",
+      "subscriptions": "الاشتراكات",
+      "invoices": "الفواتير",
+      "branding": "العلامة التجارية",
+      "domains": "النطاقات",
+      "themes": "السمات",
+      "tickets": "التذاكر",
+      "kb-analytics": "تحليلات KB",
+      "campaigns": "الحملات",
+      "analytics": "التحليلات",
+      "ai-workspace": "مساحة عمل الذكاء الاصطناعي",
+      "budgeting": "الميزانية",
+      "sales-pipelines": "خطوط المبيعات",
+      "finance-reports": "التقارير",
+      "version-control": "الإصدارات",
+      "changelog": "سجل التغييرات",
+      "change-notifications": "الإشعارات",
+      "feature-rollouts": "الإصدارات",
+      "dashboard-builder": "لوحات التحكم",
+      "report-builder": "التقارير",
+      "beta-features": "الميزات التجريبية",
+      "api-testing": "اختبار API",
+      "data-experiments": "تجارب البيانات",
+      "campaign-backtesting": "الاختبار الخلفي",
+      "environment-management": "البيئات",
+      "project-boards": "لوحات المشاريع",
+      "documents": "المستندات",
+      "team-chat": "دردشة الفريق",
+      "qa-tools": "أدوات QA",
+      "workflow-builder": "منشئ العمل",
+      "test-suites": "مجموعات الاختبار",
+      "inbox": "صندوق الوارد",
+      "templates": "القوالب",
+      "email-templates": "البريد الإلكتروني",
+      "notification-templates": "الإشعارات",
+      "template-library": "المكتبة",
+      "general-chat": "الدردشة",
+      "school-chat": "دردشة المدرسة",
+      "debug-assistant": "مساعد التصحيح",
+      "log-analyzer": "محلل السجلات",
+      "marketing-planner": "التسويق",
+      "sales-strategy": "المبيعات",
+      "meeting-summarizer": "الملخص",
+      "task-manager": "المهام",
+      "model-monitoring": "المراقبة",
+      "ethics-dashboard": "الأخلاق",
+      "all-schools": "كل المدارس",
+      "all-staff": "كل الموظفين",
+      "all-students": "كل الطلاب",
+      "all-partners": "كل الشركاء",
+      "alumni-directory": "الدليل",
+      "community-groups": "المجموعات",
+      "auth": "المصادقة",
+      "roles": "الأدوار",
+      "third-party-apps": "التطبيقات",
+      "key-management": "الإدارة",
+      "key-analytics": "التحليلات",
+      "system-logs": "النظام",
+      "recovery-plans": "الاسترداد",
+      "tenant-settings": "إعدادات المستأجر",
+      "resource-quotas": "الحصص",
+      "history": "السجل",
+      "main": "لوحة التحكم",
+      "courses": "الدورات",
+      "grades": "الدرجات",
+      "calendar": "التقويم",
+      "announcements": "الإعلانات",
+      "resources": "الموارد",
+      "profile": "الملف الشخصي",
+      "notifications": "الإشعارات",
+      "bookings": "الحجوزات",
+      "my-orders": "طلباتي",
+      "pay-fees": "دفع الرسوم",
+      "keyword-explorer": "الكلمات المفتاحية",
+      "email-subjects": "المواضيع",
+      "ad-copy": "نص الإعلان",
+      "competitor-insights": "المنافسون",
+      "campaign-simulator": "المحاكاة",
+      "revenue-dashboard": "الإيرادات",
+      "subscription-insights": "الاشتراكات",
+      "invoice-manager": "الفواتير",
+      "expense-tracker": "المصروفات",
+      "forecasting-tool": "التنبؤ",
+      "vector-database": "قاعدة المتجهات",
+      "chart-builder": "منشئ الرسوم البيانية",
+      "report-generator": "منشئ التقارير",
+      "data-connectors": "الموصلات",
+      "lesson-plans": "خطط الدروس"
+    }
+  },
+  "apps": {
+    "studio": "استوديو",
+    "media": "الوسائط",
+    "gamification": "الألعاب",
+    "leisure": "الترفيه",
+    "market": "السوق",
+    "lifestyle": "أسلوب الحياة",
+    "hobbies": "الهوايات",
+    "knowledge": "المعرفة",
+    "sports": "الرياضة",
+    "religion": "الدين",
+    "sudoku": "سودوكو",
+    "services": "الخدمات",
+    "help": "مساعدة",
+    "finance": "المالية",
+    "placeholder": {
+      "title": "قريباً",
+      "description": "هذا التطبيق قيد الإنشاء. تحقق مرة أخرى قريبًا للحصول على ميزات جديدة ومثيرة!"
+    }
+  },
+  "sudoku": {
+    "title": "سودوكو",
+    "selectDifficulty": "اختر مستوى الصعوبة",
+    "easy": "سهل",
+    "medium": "متوسط",
+    "hard": "صعب",
+    "newGame": "لعبة جديدة",
+    "check": "تحقق",
+    "solve": "حل",
+    "unsolved": "اللوحة لم تحل بشكل صحيح.",
+    "solved": "تهانينا! لقد حليت اللغز!",
+    "confirmNewGame": "هل أنت متأكد من أنك تريد بدء لعبة جديدة؟ سيتم فقدان تقدمك الحالي."
+  },
+  "emptyState": {
+    "selectModule": "اختر وحدة للبدء.",
+    "implementationNeeded": "الوحدة [{{module}}] جاهزة للتنفيذ."
+  },
+  "userViews": {
+    "provider": "عرض المزود",
+    "admin": "عرض المسؤول",
+    "teacher": "عرض المعلم",
+    "student": "عرض الطالب",
+    "parent": "عرض ولي الأمر",
+    "admissions": "عرض القبول",
+    "individual": "عرض فردي"
+  },
+  "dataEmptyState": {
+    "noTickets": {
+      "title": "لا توجد تذاكر دعم حتى الآن",
+      "description": "عندما يرسل المستخدمون تذاكر الدعم، ستظهر هنا في عمود 'جديد'."
+    },
+    "noCampaigns": {
+      "title": "لم يتم إنشاء حملات",
+      "description": "ابدأ حملتك التسويقية الأولى لتتبع الأداء والمشاركة.",
+      "action": "حملة جديدة"
+    }
+  },
+  "teacherDashboard": {
+    "noAssignments": {
+      "title": "كل شيء محدّث!",
+      "description": "لا توجد واجبات لتقييمها."
+    }
+  },
+  "studentDashboard": {
+    "noTasks": {
+      "title": "لا توجد مهام قادمة",
+      "description": "ليس لديك واجبات مستحقة قريباً."
+    },
+    "wellnessCard": {
+      "title": "تسجيل الحالة النفسية",
+      "prompt": "كيف تشعر اليوم؟",
+      "happy": "سعيد",
+      "neutral": "عادي",
+      "sad": "حزين",
+      "submitted": "شكراً لمشاركتك!",
+      "recentMoods": "حالاتك النفسية الأخيرة"
+    }
+  }
+}

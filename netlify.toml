@@ -1,0 +1,57 @@
+# 🚀 The Ceremonial Scroll of Netlify Deployment 🚀
+# This configuration file instructs Netlify on how to build and deploy
+# the GROW YouR NEED Super App.
+
+# --- Build Settings ---
+# This section defines the commands and directories for the build process.
+[build]
+  # The command to build the project. We use 'pnpm build' as per our sacred rituals.
+  command = "pnpm build"
+
+  # The directory that contains the production-ready static files after the build.
+  # For Vite projects, this is typically 'dist'.
+  publish = "dist"
+
+  # Specifies the Node.js version to use for the build.
+  # This ensures consistency with our development environment.
+  [build.environment]
+    NODE_VERSION = "18"
+
+# --- Redirects and Rewrites ---
+# This section handles routing rules for the deployed site.
+
+# Rule for Single Page Application (SPA) routing.
+# This is the most crucial rule for a React application using React Router.
+# It ensures that any request that doesn't match a static file in the 'dist'
+# directory is rewritten to serve 'index.html'. This allows React Router
+# to handle all client-side navigation correctly.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# --- Headers ---
+# This section allows you to define custom HTTP headers for your site.
+# It enhances security and performance.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Content Security Policy (CSP) - A strong starting point.
+    # In a real production environment, this would be much more specific,
+    # listing all allowed domains for scripts, styles, fonts, etc.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://esm.sh https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://esm.sh; font-src 'self' https://fonts.gstatic.com; connect-src 'self' ws://localhost:3001 wss://your-production-ws-url.com;"
+    
+    # Prevents clickjacking attacks.
+    X-Frame-Options = "DENY"
+    
+    # Prevents MIME-sniffing attacks.
+    X-Content-Type-Options = "nosniff"
+    
+    # Enables XSS protection in older browsers.
+    X-XSS-Protection = "1; mode=block"
+    
+    # Controls how much referrer information is sent.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Specifies which browser features are allowed.
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"

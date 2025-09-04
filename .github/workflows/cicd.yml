@@ -1,0 +1,116 @@
+# .github/workflows/cicd.yml
+name: "🚀 Continuous Integration & Deployment"
+
+# This workflow triggers on pushes and pull requests to the main and develop branches.
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  # =================================================================
+  # JOB 1: Build & Test
+  # This job runs on every push and PR to ensure code quality and stability.
+  # =================================================================
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup PNPM using the official action. The version is read from package.json.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      # Setup Node.js. It will use pnpm's cache for faster dependency installation.
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint and Format Check
+        run: |
+          pnpm lint
+          pnpm exec prettier --check .
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run E2E tests
+        run: pnpm test
+
+      - name: Build project
+        # A dummy API_KEY may be needed for build-time environment checks.
+        # The real key is only used by the backend at runtime.
+        env:
+          API_KEY: "DUMMY_KEY_FOR_BUILD_PROCESS"
+        run: pnpm build
+
+      # Upload the 'dist' folder as an artifact to be used in the deploy job.
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  # =================================================================
+  # JOB 2: Deploy
+  # This job depends on the success of 'build-and-test' and ONLY runs
+  # on a push to the 'main' branch, preventing accidental deployments.
+  # =================================================================
+  deploy:
+    name: Deploy to Production
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      # --- DEPLOYMENT STEP ---
+      # This is an example for Vercel. Replace with your hosting provider's action.
+      # You must set VERCEL_TOKEN, VERCEL_ORG_ID, and VERCEL_PROJECT_ID as
+      # encrypted secrets in your repository settings under "Secrets and variables" > "Actions".
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod' # This flag deploys to the production environment in Vercel.
+          
+      # --- ALTERNATIVE DEPLOYMENT EXAMPLES ---
+      #
+      # Example: Deploy to GitHub Pages
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./dist
+      #
+      # Example: Deploy to Netlify
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: './dist'
+          production-branch: main
+          env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

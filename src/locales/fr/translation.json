@@ -1,0 +1,443 @@
+
+{
+  "login": {
+    "title": "GROW YouR NEED",
+    "subtitle": "Sélectionnez votre rôle pour accéder à la Super App"
+  },
+  "roles": {
+    "provider": "Fournisseur",
+    "admin": "Admin",
+    "teacher": "Enseignant",
+    "student": "Étudiant",
+    "parent": "Parent",
+    "admissions": "Admissions",
+    "individual": "Individuel"
+  },
+  "footer": {
+    "launcher": {
+      "open": "Ouvrir les Applications",
+      "openGrid": "Ouvrir la Grille d'applications"
+    },
+    "logout": "Déconnexion",
+    "language": "Langue",
+    "restore": "Restaurer {{app}}"
+  },
+  "overlayWindow": {
+    "minimize": "Minimiser {{title}}",
+    "maximize": "Agrandir {{title}}",
+    "restore": "Restaurer {{title}}",
+    "close": "Fermer {{title}}"
+  },
+  "datatable": {
+    "search": "Rechercher...",
+    "searchPlaceholder": "Rechercher des enregistrements...",
+    "noResults": "Aucun résultat trouvé.",
+    "pageInfo": "Page {{currentPage}} sur {{totalPages}}"
+  },
+  "views": {
+    "adminsManager": {
+      "title": "Gérer les Admins",
+      "addAdmin": "Ajouter Admin"
+    },
+    "teachersManager": {
+      "title": "Gérer les Enseignants",
+      "addTeacher": "Ajouter Enseignant"
+    },
+    "studentsManager": {
+      "title": "Gérer les Étudiants",
+      "addStudent": "Ajouter Étudiant"
+    },
+    "parentsManager": {
+      "title": "Gérer les Parents",
+      "addParent": "Ajouter Parent"
+    },
+    "invoicesManager": {
+      "title": "Gérer les Factures"
+    },
+    "subscriptionsManager": {
+      "title": "Gérer les Abonnements"
+    },
+    "newSchoolForm": {
+      "title": "Intégrer une Nouvelle École",
+      "schoolInfo": "Informations sur l'École",
+      "adminInfo": "Compte Administrateur Initial",
+      "submitButton": "Créer l'École",
+      "submitButtonTreatment": "Allons-y ! ->",
+      "submittingButton": "Création en cours..."
+    },
+     "adminFormModal": {
+      "addTitle": "Ajouter un nouvel admin",
+      "editTitle": "Modifier l'admin",
+      "nameLabel": "Nom complet",
+      "emailLabel": "Adresse e-mail",
+      "schoolLabel": "École",
+      "statusLabel": "Statut",
+      "addButton": "Ajouter Admin",
+      "saveButton": "Sauvegarder les changements",
+      "savingButton": "Sauvegarde..."
+    },
+    "brandingManager": {
+      "title": "Paramètres de Marque"
+    },
+    "domainsManager": {
+      "title": "Gérer les Domaines",
+      "addButton": "Ajouter un Domaine"
+    },
+    "themesManager": {
+      "title": "Appliquer un Thème",
+      "applyButton": "Appliquer le Thème",
+      "appliedButton": "Appliqué"
+    },
+    "ticketsManager": {
+      "title": "Tickets de Support"
+    },
+    "kbAnalytics": {
+      "title": "Analyse de la Base de Connaissances"
+    },
+    "concierge": {
+      "placeholder": "Demandez au Concierge IA...",
+      "newChat": "Nouveau Chat"
+    },
+    "assignmentView": {
+      "title": "Détails du Devoir",
+      "course": "Cours",
+      "dueDate": "Date Limite",
+      "instructions": "Instructions",
+      "yourSubmission": "Votre Soumission",
+      "status": "Statut",
+      "statusNotSubmitted": "Non Soumis",
+      "statusSubmittedOn": "Soumis le {{date}}",
+      "submittedText": "Texte Soumis",
+      "submittedFile": "Fichier Soumis",
+      "submitWork": "Soumettre Votre Travail",
+      "textResponsePlaceholder": "Tapez votre réponse ici...",
+      "fileUploadLabel": "Joindre un fichier (optionnel)",
+      "submitButton": "Soumettre le Devoir",
+      "submittingButton": "Soumission...",
+      "updateButton": "Mettre à Jour la Soumission"
+    },
+    "providerProfile": {
+      "title": "Profil du Fournisseur",
+      "companyInfo": "Informations sur l'entreprise",
+      "companyNameLabel": "Nom de l'entreprise",
+      "contactEmailLabel": "E-mail de contact principal",
+      "websiteLabel": "Site web de l'entreprise",
+      "saveButton": "Enregistrer le profil",
+      "savingButton": "Enregistrement..."
+    },
+    "dataConnectorForm": {
+        "aiConfirmTitle": "Utiliser l'assistant IA ?",
+        "aiConfirmDescription": "Pour les connecteurs comme Google Analytics et Stripe, nous pouvons utiliser l'IA pour suggérer automatiquement des mappages pour les champs courants. Souhaitez-vous passer à l'étape de mappage IA ?",
+        "aiConfirmButton": "Oui, utiliser l'IA",
+        "aiSkipButton": "Non, ignorer pour l'instant"
+    },
+    "admissionsDashboard": {
+      "title": "Tableau de Bord des Admissions",
+      "applicationTrends": "Tendances des Candidatures"
+    },
+    "financeTools": {
+        "invoiceForm": {
+            "addTitle": "Ajouter une nouvelle facture",
+            "editTitle": "Modifier la facture",
+            "schoolLabel": "École/Client",
+            "amountLabel": "Montant ($)",
+            "dateLabel": "Date de la facture",
+            "dueDateLabel": "Date d'échéance",
+            "statusLabel": "Statut",
+            "addButton": "Ajouter une facture",
+            "saveButton": "Sauvegarder les modifications"
+        },
+        "expenseForm": {
+            "addTitle": "Ajouter une nouvelle dépense",
+            "editTitle": "Modifier la dépense",
+            "dateLabel": "Date",
+            "categoryLabel": "Catégorie",
+            "amountLabel": "Montant ($)",
+            "descriptionLabel": "Description",
+            "addButton": "Ajouter une dépense",
+            "saveButton": "Sauvegarder les modifications",
+            "recurringLabel": "Dépense récurrente",
+            "recurringDescription": "Configurer cette dépense pour qu'elle se répète automatiquement.",
+            "repeatsLabel": "Répéter",
+            "endDateLabel": "Date de fin (facultatif)"
+        }
+    },
+    "versionControl": {
+      "title": "Contrôle de Version",
+      "commitHistory": "Historique des Commits",
+      "generateReleaseNotes": "Générer les Notes de Version depuis les Commits",
+      "generating": "Génération...",
+      "releaseNotesPlaceholder": "Sélectionnez les commits pour générer les notes...",
+      "aiGeneratedNotes": "Notes de Version Générées par l'IA",
+      "noCommits": "Aucun commit sélectionné."
+    },
+    "changelog": {
+      "title": "Journal des Modifications du Produit",
+      "aiEditorTitle": "Éditeur de Notes de Version IA",
+      "notesPlaceholder": "Entrez les notes de version ici...",
+      "summarizeButton": "Résumer avec l'IA",
+      "summarizing": "Résumé en cours...",
+      "aiSummaryTitle": "Résumé Généré par l'IA (Modifiable)",
+      "aiSummaryPlaceholder": "Le résumé de l'IA apparaîtra ici..."
+    },
+    "lessonPlanner": {
+      "title": "Planificateur de Leçons",
+      "newPlan": "Nouveau Plan",
+      "noPlansTitle": "Aucun Plan de Leçon",
+      "noPlansDescription": "Créez votre premier plan de leçon pour commencer.",
+      "editorTitle": "Éditeur de Plan de Leçon",
+      "planTitleLabel": "Titre du Plan",
+      "courseLabel": "Cours",
+      "dateLabel": "Date",
+      "objectivesLabel": "Objectifs d'Apprentissage",
+      "materialsLabel": "Matériels et Ressources",
+      "activitiesLabel": "Activités et Procédures",
+      "saveButton": "Enregistrer le Plan",
+      "deleteButton": "Supprimer le Plan",
+      "aiAssistantButton": "Assistant IA",
+      "aiModalTitle": "Assistant IA pour Plans de Leçon",
+      "aiTopicLabel": "Sujet de la Leçon",
+      "aiObjectiveLabel": "Objectif Principal d'Apprentissage",
+      "aiGenerateButton": "Générer un Brouillon",
+      "aiGenerating": "Génération...",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce plan de leçon ?"
+    },
+    "marketingTools": {
+        "campaignsManager": {
+            "title": "Campagnes Marketing",
+            "addCampaign": "Nouvelle Campagne"
+        },
+        "campaignForm": {
+            "addTitle": "Ajouter une Nouvelle Campagne",
+            "nameLabel": "Nom de la Campagne",
+            "channelLabel": "Canal",
+            "statusLabel": "Statut",
+            "spendLabel": "Dépense ($)",
+            "addButton": "Ajouter Campagne"
+        },
+        "analytics": {
+            "title": "Analyses Marketing",
+            "conversionsByChannel": "Conversions par Canal"
+        },
+        "aiWorkspace": {
+            "title": "Espace de Travail IA Marketing",
+            "subtitle": "Utilisez l'IA pour générer et simuler vos actifs marketing.",
+            "tabs": {
+                "keywords": "Explorateur de Mots-clés",
+                "subjects": "Sujets d'Email",
+                "adCopy": "Texte Publicitaire",
+                "competitors": "Infos Concurrents",
+                "simulator": "Simulateur de Campagne"
+            }
+        }
+    },
+    "predictiveAnalytics": {
+      "title": "Analyse Prédictive",
+      "ltvForecast": "Prévision de la Valeur à Vie du Client (LTV)",
+      "highRiskChurn": "Utilisateurs à Haut Risque de Désabonnement",
+      "churnProbability": "Probabilité de Désabonnement"
+    },
+    "cohortAnalysis": {
+      "title": "Analyse de Cohorte : Rétention des Utilisateurs",
+      "retentionBySignup": "Rétention par Mois d'Inscription",
+      "users": "Utilisateurs"
+    }
+  },
+  "header": {
+    "tooltips": {
+      "notifications": "Ouvrir les notifications",
+      "help": "Ouvrir le centre d'aide"
+    }
+  },
+  "nav": {
+    "modules": {
+      "dashboard": "Tableau de Bord",
+      "schools": "Écoles",
+      "tools": "Outils",
+      "communication": "Communication",
+      "concierge": "Concierge",
+      "directories": "Annuaires",
+      "system": "Système",
+      "school-hub": "Portail École",
+      "comms": "Communications",
+      "knowledge": "Savoir",
+      "personal-hub": "Portail Personnel"
+    },
+    "header": {
+      "analytics": "Analyses",
+      "monitoring": "Surveillance",
+      "onboarding": "Intégration",
+      "users": "Utilisateurs",
+      "billing": "Facturation",
+      "planning": "Planification",
+      "marketing": "Marketing",
+      "finance": "Finance",
+      "updates": "Mises à jour",
+      "collaboration": "Collaboration",
+      "testing-automation": "Test et Automatisation",
+      "templates": "Modèles",
+      "schedule": "Programmation",
+      "video-social": "Vidéo et Social",
+      "technical-help": "Aide Technique",
+      "business-help": "Aide Commerciale",
+      "productivity-hub": "Productivité",
+      "ai-governance": "Gouvernance IA",
+      "students": "Étudiants",
+      "parents": "Parents",
+      "alumni-community": "Anciens Élèves",
+      "api-keys": "Clés API",
+      "logs": "Journaux",
+      "multi-tenancy": "Multi-sites",
+      "bulk-operations": "Opérations en Masse",
+      "legal-compliance": "Légal",
+      "audit-logs": "Journaux d'Audit"
+    },
+    "subnav": {
+      "usage-stats": "Statistiques",
+      "revenue-reports": "Revenus",
+      "active-users": "Utilisateurs Actifs",
+      "growth-trends": "Croissance",
+      "predictive-analytics": "Prédictif",
+      "engagement-insights": "Engagement",
+      "churn-retention": "Rétention",
+      "parent-engagement": "Engagement Parent",
+      "cohort-analysis": "Cohortes",
+      "system-health": "Santé Système",
+      "incident-response": "Réponse Incident",
+      "manage-schools": "Gérer les Écoles",
+      "pay-fees": "Payer les Frais",
+      "keyword-explorer": "Mots-clés",
+      "email-subjects": "Sujets",
+      "ad-copy": "Texte Pub",
+      "competitor-insights": "Concurrents",
+      "campaign-simulator": "Simulateur",
+      "revenue-dashboard": "Revenus",
+      "subscription-insights": "Abonnements",
+      "invoice-manager": "Factures",
+      "expense-tracker": "Dépenses",
+      "forecasting-tool": "Prévisions",
+      "budgeting": "Budgétisation",
+      "sales-pipelines": "Ventes",
+      "finance-reports": "Rapports",
+      "feature-rollouts": "Déploiements",
+      "environment-management": "Environnements",
+      "project-boards": "Projets",
+      "documents": "Documents",
+      "team-chat": "Chat d'équipe",
+      "qa-tools": "Outils QA",
+      "workflow-builder": "Workflows",
+      "test-suites": "Tests",
+      "email-templates": "Email",
+      "notification-templates": "Notifications",
+      "template-library": "Bibliothèque",
+      "school-chat": "Chat École",
+      "debug-assistant": "Assistant Débogage",
+      "log-analyzer": "Analyseur Logs",
+      "marketing-planner": "Marketing",
+      "sales-strategy": "Ventes",
+      "meeting-summarizer": "Résumé Réunion",
+      "task-manager": "Tâches",
+      "model-monitoring": "Surveillance",
+      "ethics-dashboard": "Éthique",
+      "all-students": "Tous les Étudiants",
+      "all-parents": "Tous les Parents",
+      "alumni-directory": "Annuaire",
+      "community-groups": "Groupes",
+      "language-settings": "Langues",
+      "third-party-apps": "Apps",
+      "key-management": "Gestion",
+      "key-analytics": "Analyses",
+      "system-logs": "Système",
+      "recovery-plans": "Récupération",
+      "tenant-settings": "Param. Locataire",
+      "resource-quotas": "Quotas",
+      "vector-database": "Base Vectorielle",
+      "templates": "Modèles",
+      "chart-builder": "Créateur de graphiques",
+      "report-generator": "Générateur de rapports",
+      "data-connectors": "Connecteurs",
+      "lesson-plans": "Plans de Leçon",
+      "campaigns": "Campagnes",
+      "analytics": "Analyses",
+      "ai-workspace": "Espace IA"
+    }
+  },
+  "apps": {
+    "studio": "Studio",
+    "media": "Média",
+    "gamification": "Gamification",
+    "leisure": "Loisirs",
+    "market": "Marché",
+    "lifestyle": "Style de Vie",
+    "hobbies": "Passe-temps",
+    "knowledge": "Savoir",
+    "sports": "Sports",
+    "religion": "Religion",
+    "sudoku": "Sudoku",
+    "services": "Services",
+    "help": "Aide",
+    "finance": "Finance",
+    "placeholder": {
+      "title": "Bientôt Disponible",
+      "description": "Cette application est en cours de construction. Revenez bientôt pour de nouvelles fonctionnalités passionnantes !"
+    }
+  },
+  "sudoku": {
+    "title": "Sudoku",
+    "selectDifficulty": "Choisissez une Difficulté",
+    "easy": "Facile",
+    "medium": "Moyen",
+    "hard": "Difficile",
+    "newGame": "Nouveau Jeu",
+    "check": "Vérifier",
+    "solve": "Résoudre",
+    "unsolved": "Le tableau n'est pas résolu correctement.",
+    "solved": "Félicitations ! Vous avez résolu le puzzle !",
+    "confirmNewGame": "Êtes-vous sûr de vouloir commencer une nouvelle partie ? Votre progression actuelle sera perdue."
+  },
+  "emptyState": {
+    "selectModule": "Sélectionnez un module pour commencer.",
+    "implementationNeeded": "Le module [{{module}}] est prêt à être implémenté."
+  },
+  "userViews": {
+    "provider": "Vue Fournisseur",
+    "admin": "Vue Admin",
+    "teacher": "Vue Enseignant",
+    "student": "Vue Étudiant",
+    "parent": "Vue Parent",
+    "admissions": "Vue Admissions",
+    "individual": "Vue Individuelle"
+  },
+  "dataEmptyState": {
+    "noTickets": {
+      "title": "Aucun ticket de support pour le moment",
+      "description": "Lorsque les utilisateurs soumettent des tickets de support, ils apparaîtront ici dans la colonne 'Nouveau'."
+    },
+    "noCampaigns": {
+      "title": "Aucune campagne créée",
+      "description": "Lancez votre première campagne marketing pour suivre les performances et l'engagement.",
+      "action": "Nouvelle Campagne"
+    }
+  },
+  "teacherDashboard": {
+    "noAssignments": {
+      "title": "Tout est à jour !",
+      "description": "Il n'y a aucun devoir à noter."
+    }
+  },
+  "studentDashboard": {
+    "noTasks": {
+      "title": "Aucune tâche à venir",
+      "description": "Vous n'avez aucun devoir à rendre bientôt."
+    },
+    "wellnessCard": {
+      "title": "Bilan Bien-être",
+      "prompt": "Comment vous sentez-vous aujourd'hui ?",
+      "happy": "Heureux",
+      "neutral": "Ça va",
+      "sad": "Triste",
+      "submitted": "Merci d'avoir partagé !",
+      "recentMoods": "Vos humeurs récentes"
+    }
+  }
+}

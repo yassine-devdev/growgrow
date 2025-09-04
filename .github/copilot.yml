@@ -1,0 +1,91 @@
+# -----------------------------------------------------------------
+# 🧿 The Ceremonial Scroll of Copilot Guidance 🧿
+# -----------------------------------------------------------------
+# This scroll dictates the behavior of our AI familiar, GitHub Copilot.
+# It ensures that all incantations (code) adhere to our sovereign style,
+# architectural principles, and the sacred schemas of our multiverse.
+# Adherence to this scroll is not optional; it is ceremonial.
+#
+# Reference the Aesthetic Scroll (CODE_STYLE.md) for detailed examples.
+# -----------------------------------------------------------------
+
+# --- Global Configuration ---
+copilot:
+  # Our codebase is a sacred, private grimoire. It shall not be used for training.
+  private: true
+
+  # --- General Style & Philosophy ---
+  general:
+    style:
+      # Clarity Over Cleverness: Write code that is self-documenting and easy to understand.
+      # Single Responsibility: Each function, component, and module must have a singular, well-defined purpose.
+      # DRY Principle: Abstract reusable logic into hooks, helpers, or services.
+      commenting_style: "Use JSDoc for functions, interfaces, and complex logic. The purpose of the code should be clear from its implementation."
+      naming_convention: "camelCase for variables/functions, PascalCase for components/types/interfaces."
+
+  # --- Language-Specific Incantations ---
+  language:
+    # --- The TypeScript Arcana ---
+    typescript:
+      advanced:
+        # --- API Client Functions (`/api/**/*.ts`) ---
+        api_functions:
+          # Naming: Use descriptive verbs (e.g., getUsers, updateUser, deletePost).
+          # Return Types: All functions must have an explicit `Promise<T>` return type, where T is the Zod-inferred type.
+          # Implementation: Must use the centralized `apiClient`. Do NOT use native `fetch`.
+          # Validation: The response from `apiClient` MUST be parsed with the corresponding Zod schema before being returned. This is the most sacred rule.
+          example: |
+            import { apiClient } from './apiClient';
+            import { userSchema, type User } from './schemas/userSchemas';
+
+            export const getUserById = async (id: string): Promise<User> => {
+              const data = await apiClient<User>(`/users/${id}`);
+              // This line is MANDATORY.
+              return userSchema.parse(data);
+            };
+
+        # --- Zod Schemas (`/api/schemas/**/*.ts`) ---
+        zod_schemas:
+          # Naming: Schema variables must be `camelCase` and end with `Schema` (e.g., `userSchema`). Inferred types must be `PascalCase` and exported (e.g., `export type User`).
+          # Validation Messages: All validations must have clear, user-friendly error messages (e.g., `.min(3, 'Name is required.')`).
+          # Coercion: Use `z.coerce` for form data that needs type conversion (e.g., `z.coerce.number()`).
+          # Reusability: Define base schemas and extend them using `.omit()`, `.pick()`, or `.extend()`.
+          example: |
+            import { z } from 'zod';
+
+            export const userSchema = z.object({
+              id: z.string().uuid(),
+              name: z.string().min(2, 'Name must be at least 2 characters.'),
+              email: z.string().email('Invalid email address.'),
+            });
+            export type User = z.infer<typeof userSchema>;
+
+        # --- React Components (`/**/*.tsx`) ---
+        react_components:
+          # Structure: Must be functional components using React Hooks.
+          # Props: Define props with a TypeScript `interface` or `type`, named `[ComponentName]Props`.
+          # Styling: Use Tailwind CSS utility classes exclusively. Avoid custom CSS or style objects.
+          # State Management: Be precise.
+          #   - Use `useState` for local component state ONLY.
+          #   - Use `useAppStore` (Zustand) for global UI state (theme, overlays, etc.).
+          #   - Use `useQuery` (TanStack Query) for ALL server state.
+          # Accessibility: All interactive elements must be accessible via keyboard and have appropriate ARIA attributes.
+
+    # --- Markdown & Documentation ---
+    markdown:
+      tone: |
+        Professional, clear, and slightly formal.
+        The tone should reflect our "ceremonial" standards.
+        Use active voice. Explain the "why" behind technical decisions.
+        Use markdown features like lists, code blocks, and blockquotes for readability.
+
+  # --- Pull Request Summaries ---
+  pull_requests:
+    summaries:
+      # Generate summaries that adhere to the Conventional Commits specification.
+      # The summary should be a single, concise sentence.
+      # The body should be a bulleted list of key changes.
+      format: "conventional"
+      scope: "file" # Base the summary on changes in the file.
+      body_template: |
+        - {change_description} ({file_path})

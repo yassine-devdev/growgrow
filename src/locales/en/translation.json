@@ -1,0 +1,720 @@
+
+{
+  "login": {
+    "title": "GROW YouR NEED",
+    "subtitle": "Select your role to enter the Super App"
+  },
+  "roles": {
+    "provider": "Provider",
+    "admin": "Admin",
+    "teacher": "Teacher",
+    "student": "Student",
+    "parent": "Parent",
+    "admissions": "Admissions",
+    "individual": "Individual"
+  },
+  "footer": {
+    "launcher": {
+      "open": "Open Applications",
+      "openGrid": "Open App Grid"
+    },
+    "logout": "Logout",
+    "language": "Language",
+    "restore": "Restore {{app}}",
+    "openMarket": "Open Marketplace"
+  },
+  "overlayWindow": {
+    "minimize": "Minimize {{title}}",
+    "maximize": "Maximize {{title}}",
+    "restore": "Restore {{title}}",
+    "close": "Close {{title}}"
+  },
+  "datatable": {
+    "search": "Server-side search and filter...",
+    "searchPlaceholder": "Search records...",
+    "noResults": "No Results Found",
+    "noResultsDescription": "Your search did not match any records. Try adjusting your filters.",
+    "pageInfo": "Page {{currentPage}} of {{totalPages}}"
+  },
+  "views": {
+    "adminsManager": {
+      "title": "Manage Admins",
+      "addAdmin": "Add Admin"
+    },
+    "teachersManager": {
+      "title": "Manage Teachers",
+      "addTeacher": "Add Teacher"
+    },
+    "studentsManager": {
+      "title": "Manage Students",
+      "addStudent": "Add Student"
+    },
+    "parentsManager": {
+      "title": "Manage Parents",
+      "addParent": "Add Parent"
+    },
+    "invoicesManager": {
+      "title": "Manage Invoices"
+    },
+    "subscriptionsManager": {
+      "title": "Manage Subscriptions"
+    },
+    "newSchoolForm": {
+      "title": "Onboard New School",
+      "schoolInfo": "School Information",
+      "adminInfo": "Initial Administrator Account",
+      "submitButton": "Create School",
+      "submitButtonTreatment": "Let's Go! ->",
+      "submittingButton": "Creating School..."
+    },
+    "adminFormModal": {
+      "addTitle": "Add New Admin",
+      "editTitle": "Edit Admin",
+      "nameLabel": "Full Name",
+      "emailLabel": "Email Address",
+      "schoolLabel": "School",
+      "statusLabel": "Status",
+      "addButton": "Add Admin",
+      "saveButton": "Save Changes",
+      "savingButton": "Saving..."
+    },
+    "teacherFormModal": {
+      "addTitle": "Add New Teacher",
+      "editTitle": "Edit Teacher",
+      "nameLabel": "Full Name",
+      "emailLabel": "Email Address",
+      "schoolLabel": "School",
+      "subjectLabel": "Subject",
+      "experienceLabel": "Years of Experience",
+      "statusLabel": "Status",
+      "addButton": "Add Teacher",
+      "saveButton": "Save Changes"
+    },
+    "studentFormModal": {
+      "addTitle": "Add New Student",
+      "editTitle": "Edit Student",
+      "nameLabel": "Full Name",
+      "emailLabel": "Email Address",
+      "schoolLabel": "School",
+      "gradeLabel": "Grade Level",
+      "statusLabel": "Status",
+      "addButton": "Add Student",
+      "saveButton": "Save Changes"
+    },
+    "parentFormModal": {
+      "addTitle": "Add New Parent",
+      "editTitle": "Edit Parent",
+      "nameLabel": "Full Name",
+      "emailLabel": "Email Address",
+      "schoolLabel": "School",
+      "childrenLabel": "Children (comma-separated)",
+      "statusLabel": "Status",
+      "addButton": "Add Parent",
+      "saveButton": "Save Changes"
+    },
+    "domainFormModal": {
+      "addTitle": "Add New Domain",
+      "editTitle": "Edit Domain",
+      "nameLabel": "Domain Name",
+      "statusLabel": "Status",
+      "primaryLabel": "Set as Primary Domain",
+      "addButton": "Add Domain",
+      "saveButton": "Save Changes"
+    },
+    "brandingManager": {
+      "title": "Branding Settings"
+    },
+    "domainsManager": {
+      "title": "Manage Domains",
+      "addButton": "Add Domain"
+    },
+    "themesManager": {
+      "title": "Apply a Theme",
+      "applyButton": "Apply Theme",
+      "appliedButton": "Applied"
+    },
+    "ticketsManager": {
+      "title": "Support Tickets"
+    },
+    "kbAnalytics": {
+      "title": "Knowledge Base Analytics"
+    },
+    "concierge": {
+      "placeholder": "Ask the AI Concierge...",
+      "newChat": "New Chat"
+    },
+    "gradebook": {
+      "title": "Gradebook for {{courseName}}",
+      "studentHeader": "Student",
+      "averageHeader": "Average",
+      "saving": "Saving..."
+    },
+    "assignmentView": {
+      "title": "Assignment Details",
+      "course": "Course",
+      "dueDate": "Due Date",
+      "instructions": "Instructions",
+      "yourSubmission": "Your Submission",
+      "status": "Status",
+      "statusNotSubmitted": "Not Submitted",
+      "statusSubmittedOn": "Submitted on {{date}}",
+      "submittedText": "Submitted Text",
+      "submittedFile": "Submitted File",
+      "submitWork": "Submit Your Work",
+      "textResponsePlaceholder": "Type your response here...",
+      "fileUploadLabel": "Attach a file (optional)",
+      "submitButton": "Submit Assignment",
+      "submittingButton": "Submitting...",
+      "updateButton": "Update Submission"
+    },
+    "marketplace": {
+      "addToCart": "Add to Cart",
+      "inCart": "In Cart",
+      "itemAddedToCart": "{{name}} added to cart!",
+      "shoppingCart": "Shopping Cart",
+      "emptyCart": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "tax": "Tax (est.)",
+      "total": "Total",
+      "checkout": "Checkout",
+      "checkingOut": "Processing...",
+      "checkoutSuccess": "Checkout successful! Thank you for your order."
+    },
+    "providerProfile": {
+      "title": "Provider Profile",
+      "companyInfo": "Company Information",
+      "companyNameLabel": "Company Name",
+      "contactEmailLabel": "Primary Contact Email",
+      "websiteLabel": "Company Website",
+      "saveButton": "Save Profile",
+      "savingButton": "Saving..."
+    },
+    "gradeEditModal": {
+      "title": "Edit Grade for {{studentName}}",
+      "assignment": "Assignment",
+      "score": "Score (out of {{maxPoints}})",
+      "feedback": "Feedback",
+      "generateFeedback": "Generate with AI",
+      "generating": "Generating...",
+      "save": "Save Grade",
+      "saving": "Saving..."
+    },
+    "teacherGradebook": {
+        "feedbackIndicator": "This grade includes feedback."
+    },
+    "dataConnectorForm": {
+        "aiConfirmTitle": "Use AI Assistant?",
+        "aiConfirmDescription": "For connectors like Google Analytics and Stripe, we can use AI to automatically suggest mappings for common fields. Would you like to proceed to the AI mapping step?",
+        "aiConfirmButton": "Yes, use AI",
+        "aiSkipButton": "No, skip for now"
+    },
+    "assignmentsManager": {
+      "title": "Manage Assignments",
+      "addAssignment": "Add Assignment",
+      "deleteSuccess": "Assignment deleted successfully",
+      "deleteError": "Failed to delete assignment",
+      "deleteConfirm": "Are you sure you want to delete this assignment?",
+      "actionsHeader": "Actions",
+      "emptyTitle": "No Assignments Created",
+      "emptyDescription": "Get started by creating the first assignment for your courses."
+    },
+    "assignmentForm": {
+      "addTitle": "Create New Assignment",
+      "editTitle": "Edit Assignment",
+      "titleLabel": "Title",
+      "descriptionLabel": "Description / Instructions",
+      "courseLabel": "Course",
+      "dueDateLabel": "Due Date",
+      "maxPointsLabel": "Max Points",
+      "addButton": "Add Assignment",
+      "saveButton": "Save Changes",
+      "addSuccess": "Assignment added successfully",
+      "updateSuccess": "Assignment updated successfully",
+      "saveError": "Failed to save assignment"
+    },
+    "submissions": {
+        "notFound": "Assignment details could not be found.",
+        "backLink": "Back to all assignments",
+        "instructions": "Instructions",
+        "submissionsTitle": "Student Submissions"
+    },
+    "studentAssignments": {
+      "title": "My Assignments",
+      "statusHeader": "Status"
+    },
+    "admissionsDashboard": {
+      "title": "Admissions Dashboard",
+      "applicationTrends": "Application Trends"
+    },
+    "financeTools": {
+        "invoiceForm": {
+            "addTitle": "Add New Invoice",
+            "editTitle": "Edit Invoice",
+            "schoolLabel": "School/Client",
+            "amountLabel": "Amount ($)",
+            "dateLabel": "Invoice Date",
+            "dueDateLabel": "Due Date",
+            "statusLabel": "Status",
+            "addButton": "Add Invoice",
+            "saveButton": "Save Changes"
+        },
+        "expenseForm": {
+            "addTitle": "Add New Expense",
+            "editTitle": "Edit Expense",
+            "dateLabel": "Date",
+            "categoryLabel": "Category",
+            "amountLabel": "Amount ($)",
+            "descriptionLabel": "Description",
+            "addButton": "Add Expense",
+            "saveButton": "Save Changes",
+            "recurringLabel": "Recurring Expense",
+            "recurringDescription": "Set this expense to repeat automatically.",
+            "repeatsLabel": "Repeats",
+            "endDateLabel": "End Date (Optional)"
+        }
+    },
+    "versionControl": {
+      "title": "Version Control",
+      "commitHistory": "Commit History",
+      "generateReleaseNotes": "Generate Release Notes from Commits",
+      "generating": "Generating...",
+      "releaseNotesPlaceholder": "Select commits to generate release notes...",
+      "aiGeneratedNotes": "AI-Generated Release Notes",
+      "noCommits": "No commits selected."
+    },
+    "changelog": {
+      "title": "Product Changelog",
+      "aiEditorTitle": "AI Release Notes Editor",
+      "notesPlaceholder": "Enter release notes here...",
+      "summarizeButton": "Summarize with AI",
+      "summarizing": "Summarizing...",
+      "aiSummaryTitle": "AI Generated Summary (Editable)",
+      "aiSummaryPlaceholder": "AI summary will appear here..."
+    },
+    "lessonPlanner": {
+      "title": "Lesson Planner",
+      "newPlan": "New Plan",
+      "noPlansTitle": "No Lesson Plans",
+      "noPlansDescription": "Create your first lesson plan to get started.",
+      "editorTitle": "Lesson Plan Editor",
+      "planTitleLabel": "Plan Title",
+      "courseLabel": "Course",
+      "dateLabel": "Date",
+      "objectivesLabel": "Learning Objectives",
+      "materialsLabel": "Materials & Resources",
+      "activitiesLabel": "Activities & Procedures",
+      "saveButton": "Save Plan",
+      "deleteButton": "Delete Plan",
+      "aiAssistantButton": "AI Assistant",
+      "aiModalTitle": "AI Lesson Plan Assistant",
+      "aiTopicLabel": "Lesson Topic",
+      "aiObjectiveLabel": "Primary Learning Objective",
+      "aiGenerateButton": "Generate Draft",
+      "aiGenerating": "Generating...",
+      "confirmDelete": "Are you sure you want to delete this lesson plan?"
+    },
+    "marketingTools": {
+        "campaignsManager": {
+            "title": "Marketing Campaigns",
+            "addCampaign": "New Campaign"
+        },
+        "campaignForm": {
+            "addTitle": "Add New Campaign",
+            "nameLabel": "Campaign Name",
+            "channelLabel": "Channel",
+            "statusLabel": "Status",
+            "spendLabel": "Spend ($)",
+            "addButton": "Add Campaign"
+        },
+        "analytics": {
+            "title": "Marketing Analytics",
+            "conversionsByChannel": "Conversions by Channel"
+        },
+        "aiWorkspace": {
+            "title": "Marketing AI Workspace",
+            "subtitle": "Use AI to generate and simulate your marketing assets.",
+            "tabs": {
+                "keywords": "Keyword Explorer",
+                "subjects": "Email Subjects",
+                "adCopy": "Ad Copy",
+                "competitors": "Competitor Insights",
+                "simulator": "Campaign Simulator"
+            }
+        }
+    },
+    "predictiveAnalytics": {
+      "title": "Predictive Analytics",
+      "ltvForecast": "Lifetime Value (LTV) Forecast",
+      "highRiskChurn": "Users at High Risk of Churn",
+      "churnProbability": "Churn Probability"
+    },
+    "cohortAnalysis": {
+      "title": "Cohort Analysis: User Retention",
+      "retentionBySignup": "Retention by Signup Month",
+      "users": "Users"
+    },
+    "crm": {
+      "leads": {
+        "title": "Lead Management",
+        "addLead": "Add Lead"
+      },
+      "deals": {
+        "title": "Deals Pipeline"
+      },
+      "analytics": {
+        "title": "Sales Analytics",
+        "conversionRate": "Lead to Deal Conversion Rate",
+        "pipelineValue": "Total Pipeline Value",
+        "dealStage": "Deals by Stage",
+        "leadSource": "Leads by Source"
+      },
+      "leadForm": {
+        "addTitle": "Add New Lead",
+        "editTitle": "Edit Lead",
+        "companyName": "Company Name",
+        "contactName": "Contact Name",
+        "status": "Status",
+        "source": "Source",
+        "estimatedValue": "Estimated Value ($)",
+        "save": "Save Lead"
+      }
+    }
+  },
+  "header": {
+    "tooltips": {
+      "notifications": "Open notifications",
+      "help": "Open help center"
+    }
+  },
+  "nav": {
+    "modules": {
+      "dashboard": "Dashboard",
+      "schools": "Schools",
+      "tools": "Tools",
+      "communication": "Communication",
+      "concierge": "Concierge",
+      "directories": "Directories",
+      "system": "System",
+      "school-hub": "School Hub",
+      "comms": "Comms",
+      "knowledge": "Knowledge",
+      "personal-hub": "Personal Hub",
+      "crm": "CRM",
+      "hrm": "HRM"
+    },
+    "header": {
+      "analytics": "Analytics",
+      "monitoring": "Monitoring",
+      "onboarding": "Onboarding",
+      "users": "Users",
+      "billing": "Billing",
+      "white-label": "White Label",
+      "white-labeling": "White Labeling",
+      "support": "Support",
+      "marketing": "Marketing",
+      "finance": "Finance",
+      "updates": "Updates",
+      "data-studio": "Data Studio",
+      "sandbox": "Sandbox",
+      "collaboration": "Collaboration",
+      "testing-automation": "Testing & Automation",
+      "email": "Email",
+      "templates": "Templates",
+      "schedule": "Schedule",
+      "video-calls-social-media": "Video Calls & Social Media",
+      "chat": "Chat",
+      "technical-help": "Technical Help",
+      "business-help": "Business Help",
+      "productivity-hub": "Productivity Hub",
+      "ai-governance": "AI Governance",
+      "schools": "Schools",
+      "staff": "Staff",
+      "students": "Students",
+      "parents": "Parents",
+      "partners": "Partners",
+      "alumni-community": "Alumni & Community",
+      "general-settings": "General Settings",
+      "security": "Security",
+      "integrations": "Integrations",
+      "api-keys": "API Keys",
+      "logs": "Logs",
+      "backup-recovery": "Backup & Recovery",
+      "multi-tenancy": "Multi-Tenancy",
+      "bulk-operations": "Bulk Operations",
+      "legal-compliance": "Legal & Compliance",
+      "overview": "Overview",
+      "academics": "Academics",
+      "people": "People",
+      "planner": "Planner",
+      "planning": "Planning",
+      "messages": "Messages",
+      "library": "Library",
+      "ai-assist": "AI Assist",
+      "settings": "Settings",
+      "lifestyle": "Lifestyle",
+      "marketplace": "Marketplace",
+      "command-center": "Command Center",
+      "health": "Health Monitor",
+      "audit-logs": "Audit Logs",
+      "management": "Management",
+      "customer-success": "Customer Success",
+      "developer-platform": "Developer Platform",
+      "leads": "Leads",
+      "deals": "Deals",
+      "contacts": "Contacts",
+      "directory": "Directory",
+      "roles": "Roles",
+      "permissions": "Permissions"
+    },
+    "subnav": {
+      "usage-stats": "Usage Stats",
+      "revenue-reports": "Revenue Reports",
+      "active-users": "Active Users",
+      "growth-trends": "Growth Trends",
+      "predictive-analytics": "Predictive Analytics",
+      "engagement-insights": "Engagement Insights",
+      "churn-retention": "Churn & Retention",
+      "parent-engagement-analytics": "Parent Engagement",
+      "cohort-analysis": "Cohort Analysis",
+      "server-status": "Server Status",
+      "logs": "Logs",
+      "incidents": "Incidents",
+      "alerts": "Alerts",
+      "system-health-dashboard": "System Health",
+      "incident-response-dashboard": "Incident Response",
+      "new-school-wizard": "New School Wizard",
+      "required-docs": "Required Docs",
+      "config-setup": "Config Setup",
+      "admins": "Admins",
+      "teachers": "Teachers",
+      "students": "Students",
+      "parents": "Parents",
+      "subscriptions": "Subscriptions",
+      "invoices": "Invoices",
+      "branding": "Branding",
+      "domains": "Domains",
+      "themes": "Themes",
+      "tickets": "Tickets",
+      "kb-analytics": "KB Analytics",
+      "campaigns": "Campaigns",
+      "analytics": "Analytics",
+      "automation": "Automation",
+      "budgeting": "Budgeting",
+      "sales-pipelines": "Sales Pipelines",
+      "forecasting": "Forecasting",
+      "reports": "Reports",
+      "version-control": "Version Control",
+      "feature-rollouts": "Feature Rollouts",
+      "changelog": "Changelog",
+      "dashboard-builder": "Dashboard Builder",
+      "report-builder": "Report Builder",
+      "data-sources": "Data Sources",
+      "beta-features": "Beta Features",
+      "api-testing": "API Testing",
+      "environment-management": "Environments",
+      "project-boards": "Project Boards",
+      "documents": "Documents",
+      "team-chat": "Team Chat",
+      "qa-tools": "QA Tools",
+      "workflow-builder": "Workflow Builder",
+      "test-suites": "Test Suites",
+      "inbox": "Inbox",
+      "sent": "Sent",
+      "compose": "Compose",
+      "templates": "Templates",
+      "email-templates": "Email Templates",
+      "notification-templates": "Notification Templates",
+      "template-library": "Template Library",
+      "calendar": "Calendar",
+      "queue": "Queue",
+      "video-meetings": "Video Meetings",
+      "social-media": "Social Media",
+      "integrations": "Integrations",
+      "general-chat": "General Chat",
+      "technical-chat": "Technical Chat",
+      "business-chat": "Business Chat",
+      "school-chat": "School Chat",
+      "debug-assistant": "Debug Assistant",
+      "log-analyzer": "Log Analyzer",
+      "issue-diagnosis": "Issue Diagnosis",
+      "performance-analysis": "Performance Analysis",
+      "marketing-planner": "Marketing Planner",
+      "sales-strategy": "Sales Strategy",
+      "market-research": "Market Research",
+      "business-analytics": "Business Analytics",
+      "meeting-summarizer": "Meeting Summarizer",
+      "task-manager": "Task Manager",
+      "document-generator": "Document Generator",
+      "time-tracker": "Time Tracker",
+      "model-monitoring": "Model Monitoring",
+      "ethics-dashboard": "Ethics Dashboard",
+      "usage-analytics": "Usage Analytics",
+      "compliance-reports": "Compliance Reports",
+      "all-schools": "All Schools",
+      "school-search": "School Search",
+      "school-analytics": "School Analytics",
+      "school-profiles": "School Profiles",
+      "all-staff": "All Staff",
+      "staff-search": "Staff Search",
+      "staff-profiles": "Staff Profiles",
+      "department-view": "Department View",
+      "all-students": "All Students",
+      "student-search": "Student Search",
+      "student-profiles": "Student Profiles",
+      "class-view": "Class View",
+      "all-parents": "All Parents",
+      "parent-search": "Parent Search",
+      "parent-profiles": "Parent Profiles",
+      "family-view": "Family View",
+      "all-partners": "All Partners",
+      "partner-search": "Partner Search",
+      "partner-profiles": "Partner Profiles",
+      "relationship-management": "Relationship Mgmt",
+      "alumni-directory": "Alumni Directory",
+      "alumni-search": "Alumni Search",
+      "community-groups": "Community Groups",
+      "events": "Events",
+      "platform-branding": "Platform Branding",
+      "language-settings": "Language Settings",
+      "appearance": "Appearance",
+      "regional-settings": "Regional Settings",
+      "roles-permissions": "Roles & Permissions",
+      "authentication": "Authentication",
+      "sso-configuration": "SSO Configuration",
+      "mfa-settings": "MFA Settings",
+      "security-policies": "Security Policies",
+      "third-party-apps": "Third-party Apps",
+      "api-integrations": "API Integrations",
+      "webhooks": "Webhooks",
+      "data-sync": "Data Sync",
+      "key-management": "Key Management",
+      "key-analytics": "Key Analytics",
+      "key-permissions": "Key Permissions",
+      "key-rotation": "Key Rotation",
+      "system-logs": "System Logs",
+      "audit-logs": "Audit Logs",
+      "access-logs": "Access Logs",
+      "log-analytics": "Log Analytics",
+      "backup-configuration": "Backup Config",
+      "recovery-plans": "Recovery Plans",
+      "backup-history": "Backup History",
+      "restore-tools": "Restore Tools",
+      "tenant-settings": "Tenant Settings",
+      "resource-quotas": "Resource Quotas",
+      "tenant-dashboards": "Tenant Dashboards",
+      "tenant-templates": "Tenant Templates",
+      "main": "Dashboard",
+      "courses": "Courses",
+      "grades": "Grades",
+      "assignments": "Assignments",
+      "announcements": "Announcements",
+      "resources": "Resources",
+      "profile": "Profile",
+      "notifications": "Notifications",
+      "bookings": "Bookings",
+      "my-orders": "My Orders",
+      "pay-fees": "Pay Fees",
+      "keyword-explorer": "Keywords",
+      "email-subjects": "Subjects",
+      "ad-copy": "Ad Copy",
+      "competitor-insights": "Competitors",
+      "campaign-simulator": "Simulator",
+      "revenue-dashboard": "Revenue",
+      "subscription-insights": "Subscriptions",
+      "invoice-manager": "Invoices",
+      "expense-tracker": "Expenses",
+      "forecasting-tool": "Forecast",
+      "chart-builder": "Chart Builder",
+      "report-generator": "Reports",
+      "data-connectors": "Connectors",
+      "academic-health": "Academic Health",
+      "lesson-plans": "Lesson Plans",
+      "provider-profile": "Provider Profile",
+      "vector-database": "Vector Database",
+      "health-scoring": "Health Scoring",
+      "playbooks": "Playbooks",
+      "renewals": "Renewals",
+      "portal": "Portal",
+      "app-reviews": "App Reviews",
+      "revenue-sharing": "Revenue Sharing"
+    }
+  },
+  "apps": {
+    "studio": "Studio",
+    "media": "Media",
+    "gamification": "Gamification",
+    "leisure": "Leisure",
+    "market": "Market",
+    "lifestyle": "Lifestyle",
+    "hobbies": "Hobbies",
+    "knowledge": "Knowledge",
+    "sports": "Sports",
+    "religion": "Religion",
+    "sudoku": "Sudoku",
+    "services": "Services",
+    "help": "Help",
+    "finance": "Finance",
+    "placeholder": {
+      "title": "Coming Soon",
+      "description": "This app is under construction. Check back soon for exciting new features!"
+    }
+  },
+  "sudoku": {
+    "title": "Sudoku",
+    "selectDifficulty": "Select a Difficulty",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "newGame": "New Game",
+    "check": "Check",
+    "solve": "Solve",
+    "unsolved": "Board is not solved correctly.",
+    "solved": "Congratulations! You solved the puzzle!",
+    "confirmNewGame": "Are you sure you want to start a new game? Your current progress will be lost."
+  },
+  "emptyState": {
+    "selectModule": "Select a module to begin.",
+    "implementationNeeded": "Module [{{module}}] is ready to be implemented."
+  },
+  "userViews": {
+    "provider": "Provider View",
+    "admin": "Admin View",
+    "teacher": "Teacher View",
+    "student": "Student View",
+    "parent": "Parent View",
+    "admissions": "Admissions View",
+    "individual": "Individual View"
+  },
+  "dataEmptyState": {
+    "noTickets": {
+      "title": "No Support Tickets Yet",
+      "description": "When users submit support tickets, they will appear here in the 'New' column."
+    },
+    "noCampaigns": {
+      "title": "No Campaigns Created",
+      "description": "Start your first marketing campaign to track performance and engagement.",
+      "action": "New Campaign"
+    }
+  },
+  "teacherDashboard": {
+    "noAssignments": {
+      "title": "All Caught Up!",
+      "description": "There are no assignments to grade."
+    }
+  },
+  "studentDashboard": {
+    "noTasks": {
+      "title": "No Upcoming Tasks",
+      "description": "You have no assignments due soon."
+    },
+    "wellnessCard": {
+      "title": "Wellness Check-in",
+      "prompt": "How are you feeling today?",
+      "happy": "Happy",
+      "neutral": "Okay",
+      "sad": "Sad",
+      "submitted": "Thanks for sharing!",
+      "recentMoods": "Your Recent Moods"
+    }
+  }
+}
