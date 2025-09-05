@@ -5,7 +5,7 @@ This is the backend service for the GROW YouR NEED Super App. It implements the 
 ## Prerequisites
 
 - Node.js (v18 or later)
-- npm or yarn
+- pnpm or yarn
 - Docker (optional, for containerization)
 
 ## Getting Started
