@@ -9,64 +9,65 @@ generator client {
 
 // 2. Define the datasource (your database connection).
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL") // This loads from the .env file in the backend
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 // ==============================================================================
 // ENUMS: For defining strict, allowed values for certain fields.
+// SQLite does not support enums, so we use strings and validate in the application.
 // ==============================================================================
 
-enum Role {
-  Provider
-  Admin
-  Teacher
-  Student
-  Parent
-  Admissions
-  Individual
-}
+// enum Role {
+//   Provider
+//   Admin
+//   Teacher
+//   Student
+//   Parent
+//   Admissions
+//   Individual
+// }
 
-enum SchoolType {
-  K_12
-  University
-  Vocational
-  Other
-}
+// enum SchoolType {
+//   K_12
+//   University
+//   Vocational
+//   Other
+// }
 
-enum Plan {
-  Basic
-  Pro
-  Enterprise
-}
+// enum Plan {
+//   Basic
+//   Pro
+//   Enterprise
+// }
 
-enum Status {
-  Active
-  Inactive
-  Invited
-  Suspended
-}
+// enum Status {
+//   Active
+//   Inactive
+//   Invited
+//   Suspended
+// }
 
-enum LeadStatus {
-  New
-  Contacted
-  Qualified
-  Disqualified
-}
+// enum LeadStatus {
+//   New
+//   Contacted
+//   Qualified
+//   Disqualified
+// }
 
-enum DealStage {
-  Prospecting
-  ProposalSent
-  Negotiation
-  Won
-  Lost
-}
+// enum DealStage {
+//   Prospecting
+//   ProposalSent
+//   Negotiation
+//   Won
+//   Lost
+// }
 
-enum InvoiceStatus {
-  Paid
-  Pending
-  Overdue
-}
+// enum InvoiceStatus {
+//   Paid
+//   Pending
+//   Overdue
+// }
 
 // ==============================================================================
 // CORE MODELS: User, School, and Authentication
@@ -82,7 +83,7 @@ model User {
   address   String?
   password  String // Hashed password
 
-  role      Role
+  role      String
   avatarUrl String?
 
   schoolId String?
@@ -106,9 +107,9 @@ model School {
   id     String     @id @unique
   name   String
   domain String     @unique
-  type   SchoolType
-  plan   Plan
-  status Status
+  type   String
+  plan   String
+  status String
 
   users  User[]
   courses Course[]
@@ -199,12 +200,23 @@ model Grade {
 // PROVIDER-SPECIFIC MODELS: CRM, HRM, Billing
 // ==============================================================================
 
+model AuditLog {
+  id        String   @id @default(uuid())
+  timestamp DateTime @default(now())
+  actor     String
+  action    String
+  ipAddress String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // --- CRM ---
 model Lead {
   id             String     @id @default(uuid())
   companyName    String
   contactName    String
-  status         LeadStatus
+  status         String
   source         String
   estimatedValue Float
   createdAt      DateTime   @default(now())
@@ -214,7 +226,7 @@ model Lead {
 model Deal {
   id        String    @id @default(uuid())
   name      String
-  stage     DealStage
+  stage     String
   value     Float
   closeDate DateTime
   createdAt DateTime  @default(now())
@@ -243,7 +255,7 @@ model Invoice {
   amount      Float
   date        DateTime
   dueDate     DateTime
-  status      InvoiceStatus
+  status      String
 
   schoolId    String
   school      School        @relation(fields: [schoolId], references: [id])

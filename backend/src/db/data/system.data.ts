@@ -1,4 +1,5 @@
 import { PaginatedResponse } from "types";
+import { Prisma, type AuditLogWhereInput } from "@prisma/client";
 import {
   AuditLog,
   SecurityRole,
@@ -13,13 +14,16 @@ import {
 } from "../../../../src/api/schemas/appModulesSchemas";
 import { v4 as uuidv4 } from "uuid";
 import { paginate } from "../helpers";
+import { prisma } from "../prisma.service";
 
 interface PaginatedQuery {
   page?: string;
   pageSize?: string;
   search?: string;
   range?: string;
-  [key: string]: any;
+  // Add sorting parameters to the query interface
+  sortBy?: string;
+  sortDirection?: "asc" | "desc";
 }
 
 const mockAuditLogs: AuditLog[] = [
@@ -50,29 +54,6 @@ const mockAuditLogs: AuditLog[] = [
     actor: "Admin: admin@northwood.com",
     action: "Updated school branding settings",
     ipAddress: "203.0.113.25",
-  },
-];
-
-const mockSecurityRoles: SecurityRole[] = [
-  { id: "role-1", name: "Provider", permissions: 150 },
-  { id: "role-2", name: "Admin", permissions: 120 },
-  { id: "role-3", name: "Teacher", permissions: 80 },
-  { id: "role-4", name: "Student", permissions: 30 },
-  { id: "role-5", name: "Parent", permissions: 25 },
-];
-
-const mockApiKeys: ApiKey[] = [
-  {
-    id: uuidv4(),
-    name: "Billing Integration Key",
-    lastUsed: new Date(Date.now() - 1 * 3600000).toISOString(),
-    status: "Active",
-  },
-  {
-    id: uuidv4(),
-    name: "Legacy Marketing API",
-    lastUsed: new Date(Date.now() - 30 * 86400000).toISOString(),
-    status: "Revoked",
   },
 ];
 
@@ -170,36 +151,86 @@ const mockLegalDocs: LegalDocument[] = [
 export const getAuditLogs = async (
   query: PaginatedQuery
 ): Promise<PaginatedResponse<AuditLog>> => {
-  const { page = "1", pageSize = "10", search = "" } = query;
+  const {
+    page = "1",
+    pageSize = "10",
+    search = "",
+    sortBy = "timestamp",
+    sortDirection = "desc",
+  } = query;
   const pageNum = parseInt(page);
   const pageSizeNum = parseInt(pageSize);
-  let filteredLogs = mockAuditLogs;
-  if (search) {
-    const lowerCaseSearch = search.toLowerCase();
-    filteredLogs = mockAuditLogs.filter(
-      (log) =>
-        log.actor.toLowerCase().includes(lowerCaseSearch) ||
-        log.action.toLowerCase().includes(lowerCaseSearch) ||
-        log.ipAddress?.toLowerCase().includes(lowerCaseSearch)
-    );
-  }
-  return paginate(filteredLogs, pageNum, pageSizeNum, filteredLogs.length);
+
+  const where: AuditLogWhereInput = search
+    ? {
+        OR: [
+          { actor: { contains: search, mode: "insensitive" } },
+          { action: { contains: search, mode: "insensitive" } },
+          { ipAddress: { contains: search, mode: "insensitive" } },
+        ],
+      }
+    : {};
+
+  const [auditLogs, totalCount] = await prisma.$transaction([
+    prisma.auditLog.findMany({
+      where,
+      skip: (pageNum - 1) * pageSizeNum,
+      take: pageSizeNum,
+      orderBy: {
+        [sortBy]: sortDirection,
+      },
+    }),
+    prisma.auditLog.count({ where }),
+  ]);
+
+  // The data from Prisma is already typed correctly, so we can return it directly.
+  // The paginate helper is no longer needed here as Prisma handles it.
+  const pageCount = Math.ceil(totalCount / pageSizeNum);
+  return { rows: auditLogs, pageCount, rowCount: totalCount };
 };
 
-export const getSecurityRoles = async (query: PaginatedQuery) =>
-  paginate(
-    mockSecurityRoles,
-    parseInt(query.page || "1"),
-    parseInt(query.pageSize || "10"),
-    mockSecurityRoles.length
-  );
-export const getApiKeys = async (query: PaginatedQuery) =>
-  paginate(
-    mockApiKeys,
-    parseInt(query.page || "1"),
-    parseInt(query.pageSize || "10"),
-    mockApiKeys.length
-  );
+export const getSecurityRoles = async (
+  query: PaginatedQuery
+): Promise<PaginatedResponse<SecurityRole>> => {
+  const pageNum = parseInt(query.page || "1");
+  const pageSizeNum = parseInt(query.pageSize || "10");
+
+  const [roles, totalCount] = await prisma.$transaction([
+    prisma.securityRole.findMany({
+      skip: (pageNum - 1) * pageSizeNum,
+      take: pageSizeNum,
+    }),
+    prisma.securityRole.count(),
+  ]);
+
+  return {
+    rows: roles,
+    pageCount: Math.ceil(totalCount / pageSizeNum),
+    rowCount: totalCount,
+  };
+};
+
+export const getApiKeys = async (
+  query: PaginatedQuery
+): Promise<PaginatedResponse<ApiKey>> => {
+  const pageNum = parseInt(query.page || "1");
+  const pageSizeNum = parseInt(query.pageSize || "10");
+
+  const [keys, totalCount] = await prisma.$transaction([
+    prisma.apiKey.findMany({
+      skip: (pageNum - 1) * pageSizeNum,
+      take: pageSizeNum,
+    }),
+    prisma.apiKey.count(),
+  ]);
+
+  return {
+    rows: keys,
+    pageCount: Math.ceil(totalCount / pageSizeNum),
+    rowCount: totalCount,
+  };
+};
+
 export const getBackups = async (query: PaginatedQuery) =>
   paginate(
     mockBackups,
@@ -207,20 +238,36 @@ export const getBackups = async (query: PaginatedQuery) =>
     parseInt(query.pageSize || "10"),
     mockBackups.length
   );
-export const getIntegrations = async () => Promise.resolve(mockIntegrations);
-export const getMultiTenancySettings = async () =>
-  Promise.resolve(mockMultiTenancySettings);
-export const saveMultiTenancySettings = async (data: MultiTenancySettings) => {
+export const getIntegrations = async (): Promise<Integration[]> => {
+  return mockIntegrations;
+};
+
+export const getMultiTenancySettings =
+  async (): Promise<MultiTenancySettings> => {
+    return mockMultiTenancySettings;
+  };
+
+export const saveMultiTenancySettings = async (
+  data: MultiTenancySettings
+): Promise<MultiTenancySettings> => {
   mockMultiTenancySettings = data;
-  return Promise.resolve(mockMultiTenancySettings);
+  return mockMultiTenancySettings;
 };
-export const getBackupConfig = async () => Promise.resolve(mockBackupConfig);
-export const saveBackupConfig = async (data: BackupConfig) => {
+
+export const getBackupConfig = async (): Promise<BackupConfig> => {
+  return mockBackupConfig;
+};
+
+export const saveBackupConfig = async (
+  data: BackupConfig
+): Promise<BackupConfig> => {
   mockBackupConfig = data;
-  return Promise.resolve(mockBackupConfig);
+  return mockBackupConfig;
 };
-export const getBulkOperations = async () =>
-  Promise.resolve(mockBulkOperations);
+
+export const getBulkOperations = async (): Promise<BulkOperation[]> => {
+  return mockBulkOperations;
+};
 export const getLegalDocuments = async (query: PaginatedQuery) =>
   paginate(
     mockLegalDocs,

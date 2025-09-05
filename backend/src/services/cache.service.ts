@@ -27,7 +27,24 @@ class CacheService {
 
   async connect(): Promise<void> {
     if (!this.isConnected && !this.client.isReady) {
-      await this.client.connect();
+      // Attempt to connect but don't let Redis unavailability block the server start.
+      // Use a short timeout and swallow errors so dev can run without Redis.
+      const timeoutMs = 2000;
+      try {
+        await Promise.race([
+          this.client.connect(),
+          new Promise((_, reject) =>
+            setTimeout(
+              () => reject(new Error("Redis connection timeout")),
+              timeoutMs
+            )
+          ),
+        ]);
+      } catch (error) {
+        logger.error("Redis connect failed (continuing without redis):", {
+          error: (error as Error).message,
+        });
+      }
     }
   }
 

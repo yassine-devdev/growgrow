@@ -89,12 +89,10 @@ export const verifyAuthentication = async (data: AuthenticationResponseJSON): Pr
  * @param role The role to log in as.
  * @returns A promise that resolves to an object containing the user.
  */
-export const loginUser = async (role: Role): Promise<{ user: User }> => {
-    // In a real flow, this endpoint would receive email/password.
-    // For this project, we keep the role-based simulation.
+export const loginUser = async (data: SignInFormData): Promise<{ user: User }> => {
     return apiClient<{ user: User }>('/auth/login', {
         method: 'POST',
-        body: JSON.stringify({ role })
+        body: JSON.stringify({ email: data.identifier, password: data.password })
     });
 };
 
@@ -118,7 +116,7 @@ export const verifyPhoneOtp = async (phone: string, otp: string): Promise<{ user
     console.log(`Verifying OTP "${otp}" for phone number: ${phone}`);
     await new Promise(res => setTimeout(res, 1000));
     if (otp === '123456') { // Mock success OTP
-        return loginUser('Individual'); // Log in as a default user for demo
+        return loginUser({ identifier: 'provider@growyourneed.com', password: '123' }); // Log in as a default user for demo
     }
     throw new Error('Invalid OTP code.');
 };

@@ -10,10 +10,10 @@
     "pnpm": ">=9.0.0"
   },
   "scripts": {
-  "dev": "concurrently \"pnpm run frontend:dev\" \"pnpm --filter ./backend dev\"",
-  "build": "pnpm run frontend:build && pnpm --filter ./backend build",
-  "lint": "pnpm run frontend:lint && pnpm --filter ./backend lint",
-  "test": "pnpm run frontend:test:unit && pnpm --filter ./backend test",
+    "dev": "concurrently \"pnpm run frontend:dev\" \"pnpm --filter ./backend dev\"",
+    "build": "pnpm run frontend:build && pnpm --filter ./backend build",
+    "lint": "pnpm run frontend:lint && pnpm --filter ./backend lint",
+    "test": "pnpm run frontend:test:unit && pnpm --filter ./backend test",
     "frontend:dev": "vite",
     "frontend:build": "tsc && vite build",
     "frontend:preview": "vite preview",

@@ -6,7 +6,7 @@ import logger from "../../../utils/logger";
 // Shape we expect from the GenAI streaming chunks. Keep it narrow and explicit.
 type GenAIChunk = {
   text?: string;
-  [key: string]: unknown; // Retaining the index signature for compatibility
+  // keep only expected properties to avoid unsafe indexing
 };
 
 const toSerializable = (err: unknown): object => {
@@ -21,10 +21,12 @@ export class GeminiProvider implements IAIProvider {
   private ai: GoogleGenAI;
 
   constructor() {
-    if (!config.apiKey) {
-      throw new Error("Gemini API key is not configured.");
+    if (!config.geminiApiKey) {
+      throw new Error(
+        "Gemini API key is not configured. Set GEMINI_API_KEY in environment."
+      );
     }
-    this.ai = new GoogleGenAI({ apiKey: config.apiKey });
+    this.ai = new GoogleGenAI({ apiKey: config.geminiApiKey });
   }
 
   async generateStream(prompt: string): Promise<ReadableStream<string>> {
@@ -42,20 +44,35 @@ export class GeminiProvider implements IAIProvider {
     (async () => {
       const writer = transformStream.writable.getWriter();
       try {
-        const result = (await this.ai.models.generateContentStream({
+        const maybeIterable = await this.ai.models.generateContentStream({
           model: "gemini-2.5-flash",
           contents: prompt,
-        })) as AsyncIterable<GenAIChunk>;
+        });
 
-        for await (const chunk of result) {
-          // Defensive runtime check to ensure chunk is shaped as expected
-          if (
-            chunk &&
-            typeof chunk.text === "string" &&
-            chunk.text.length > 0
-          ) {
-            // The writable side expects GenAIChunk (the transform handles extracting .text)
-            await writer.write(chunk);
+        // The SDK may return an async iterable or a different shape; guard at runtime.
+        if (
+          maybeIterable == null ||
+          typeof (maybeIterable as AsyncIterable<GenAIChunk>)[
+            Symbol.asyncIterator
+          ] !== "function"
+        ) {
+          // Not iterable — log and finish gracefully
+          logger.error(
+            "Gemini.generateContentStream returned non-iterable response",
+            { responseType: typeof maybeIterable }
+          );
+        } else {
+          const result = maybeIterable as AsyncIterable<GenAIChunk>;
+          for await (const chunk of result) {
+            // Defensive runtime check to ensure chunk is shaped as expected
+            if (
+              chunk &&
+              typeof chunk.text === "string" &&
+              chunk.text.length > 0
+            ) {
+              // The writable side expects GenAIChunk (the transform handles extracting .text)
+              await writer.write(chunk);
+            }
           }
         }
       } catch (err: unknown) {

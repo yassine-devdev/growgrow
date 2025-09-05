@@ -6,13 +6,42 @@ import type { LegalDocument } from '@/api/schemas/appModulesSchemas';
 import type { PaginatedResponse } from '@/types';
 import { Loader2, Gavel, Upload, Eye } from 'lucide-react';
 import DataTable from '@/components/ui/DataTable';
+import Modal from '@/components/ui/Modal';
 import type { PaginationState, SortingState } from '@tanstack/react-table';
 import { DEFAULT_PAGE_SIZE } from '@/constants';
+
+const DocumentDetailsModal: React.FC<{
+  doc: LegalDocument | null;
+  isOpen: boolean;
+  onClose: () => void;
+}> = ({ doc, isOpen, onClose }) => {
+  if (!doc) return null;
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title={doc.name}>
+      <div className="space-y-4 text-sm max-h-[60vh] overflow-y-auto">
+        <div className="prose prose-sm dark:prose-invert max-w-none">
+          <p>
+            <strong>Version:</strong> {doc.version}
+          </p>
+          <p>
+            <strong>Last Updated:</strong>{" "}
+            {new Date(doc.lastUpdated).toLocaleString()}
+          </p>
+          <hr className="my-4" />
+          <div dangerouslySetInnerHTML={{ __html: doc.content }} />
+        </div>
+      </div>
+    </Modal>
+  );
+};
 
 const LegalComplianceView: React.FC = () => {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: DEFAULT_PAGE_SIZE });
     const [globalFilter, setGlobalFilter] = useState('');
+    const [selectedDoc, setSelectedDoc] = useState<LegalDocument | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { data, isLoading } = useQuery<PaginatedResponse<LegalDocument>>({
         queryKey: [QUERY_KEYS.legalDocuments, pagination, sorting, globalFilter],
@@ -58,6 +87,11 @@ const LegalComplianceView: React.FC = () => {
                     title: "No Legal Documents",
                     description: "Upload your Terms of Service, Privacy Policy, and other legal documents here."
                 }}
+            />
+            <DocumentDetailsModal
+                doc={selectedDoc}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
             />
         </div>
     );

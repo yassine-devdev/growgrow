@@ -1,138 +1,128 @@
 import { RequestHandler } from "express";
 import * as db from "../../db/database.service";
+// Import user-specific functions separately to resolve module resolution issues.
+import {
+  getAdmins,
+  getTeachers,
+  getStudents,
+  getParents,
+} from "../../db/data/user.service";
 import { GoogleGenAI } from "@google/genai";
 import config from "../../config";
+import { ZodError } from "zod";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
-// A generic controller to handle all data requests
-const handleRequest =
-  (handler: Function): RequestHandler =>
+// --- Controller Factories ---
+// These helpers create Express RequestHandlers, reducing boilerplate for common operations.
+
+/**
+ * A centralized error handler for the controller factories.
+ * It checks for specific error types (Prisma, Zod) and sends appropriate responses.
+ */
+function handleControllerError(
+  error: unknown,
+  next: (err: any) => void,
+  res: any
+) {
+  if (error instanceof ZodError) {
+    return res
+      .status(400)
+      .json({ message: "Validation error", details: error.issues });
+  } else if (
+    error instanceof PrismaClientKnownRequestError &&
+    error.code === "P2025"
+  ) {
+    return res.status(404).json({ message: "Resource not found" });
+  }
+  next(error); // Pass other errors to the global error handler
+}
+
+/** Factory for GET requests that may use query parameters. */
+const handleGet =
+  (handler: (query: any) => Promise<any>): RequestHandler =>
   async (req, res, next) => {
     try {
-      // Pass query params for pagination/sorting if the handler needs them
       const data = await handler(req.query);
       res.json(data);
     } catch (error) {
-      next(error);
+      handleControllerError(error, next, res);
     }
   };
 
-export const getProviderAnalytics = handleRequest(db.getProviderAnalytics);
-export const getServiceStatus = handleRequest(db.getServiceStatus);
-export const getCommandCenterData = handleRequest(db.getCommandCenterData);
-export const getProviderSchools = handleRequest(db.getProviderSchools);
-
-export const getProviderSchoolDetails: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
-  try {
-    const data = await db.getProviderSchoolDetails(req.params.schoolId);
-    if (!data) {
-      return res.status(404).json({ message: "School not found" });
+/** Factory for GET requests that use a URL parameter (e.g., /items/:id). */
+const handleGetById =
+  (handler: (id: string) => Promise<any>): RequestHandler =>
+  async (req, res, next) => {
+    try {
+      const data = await handler(req.params.id);
+      if (!data) {
+        return res.status(404).json({ message: "Resource not found" });
+      }
+      res.json(data);
+    } catch (error) {
+      handleControllerError(error, next, res);
     }
-    res.json(data);
-  } catch (error) {
-    next(error);
-  }
-};
+  };
 
-export const getAdmins = handleRequest(db.getAdmins);
-export const getTeachers = handleRequest(db.getTeachers);
-export const getStudents = handleRequest(db.getStudents);
-export const getParents = handleRequest(db.getParents);
-export const getAcademicHealthData = handleRequest(db.getAcademicHealthData);
-export const getExpenses = handleRequest(db.getExpenses);
-export const getInvoices = handleRequest(db.getInvoices);
-export const getUpdates = handleRequest(db.getUpdates);
-export const getVersionControlCommits = handleRequest(
-  db.getVersionControlCommits
+/** Factory for POST/PUT requests that process a request body. */
+const handlePost =
+  (handler: (body: any) => Promise<any>, createdStatus = 201): RequestHandler =>
+  async (req, res, next) => {
+    try {
+      const result = await handler(req.body);
+      res.status(createdStatus).json(result);
+    } catch (error) {
+      handleControllerError(error, next, res);
+    }
+  };
+
+/** Factory for DELETE requests that use a URL parameter. */
+const handleDelete =
+  (handler: (id: string) => Promise<any>): RequestHandler =>
+  async (req, res, next) => {
+    try {
+      await handler(req.params.id);
+      res.status(204).send();
+    } catch (error) {
+      handleControllerError(error, next, res);
+    }
+  };
+
+// --- General Data Endpoints ---
+export const getProviderAnalytics = handleGet(db.getProviderAnalytics);
+export const getServiceStatus = handleGet(db.getServiceStatus);
+export const getCommandCenterData = handleGet(db.getCommandCenterData);
+export const getProviderSchools = handleGet(db.getProviderSchools);
+export const getProviderSchoolDetails = handleGetById(
+  db.getProviderSchoolDetails
 );
-export const getAdminDashboardData = handleRequest(db.getAdminDashboardData);
-export const getTeacherDashboardData = handleRequest(
-  db.getTeacherDashboardData
-);
-export const getStudentDashboardData = handleRequest(
-  db.getStudentDashboardData
-);
-export const getParentDashboardData = handleRequest(db.getParentDashboardData);
-export const getAdmissionsDashboardData = handleRequest(
+export { getAdmins, getTeachers, getStudents, getParents };
+export const getAcademicHealthData = handleGet(db.getAcademicHealthData);
+export const getExpenses = handleGet(db.getExpenses);
+export const getInvoices = handleGet(db.getInvoices);
+export const getUpdates = handleGet(db.getUpdates);
+export const getVersionControlCommits = handleGet(db.getVersionControlCommits);
+export const getAdminDashboardData = handleGet(db.getAdminDashboardData);
+export const getTeacherDashboardData = handleGet(db.getTeacherDashboardData);
+export const getStudentDashboardData = handleGet(db.getStudentDashboardData);
+export const getParentDashboardData = handleGet(db.getParentDashboardData);
+export const getAdmissionsDashboardData = handleGet(
   db.getAdmissionsDashboardData
 );
-export const getIndividualDashboardData = handleRequest(
+export const getIndividualDashboardData = handleGet(
   db.getIndividualDashboardData
 );
-export const getNotifications = handleRequest(db.getNotifications);
-export const getProducts = handleRequest(db.getProducts);
-export const getAuditLogs = handleRequest(db.getAuditLogs);
-export const getSecurityRoles = handleRequest(db.getSecurityRoles);
-export const getApiKeys = handleRequest(db.getApiKeys);
-export const getBackups = handleRequest(db.getBackups);
-export const getIntegrations = handleRequest(db.getIntegrations);
-export const getMultiTenancySettings = handleRequest(
-  db.getMultiTenancySettings
-);
-export const getBackupConfig = handleRequest(db.getBackupConfig);
-export const getBulkOperations = handleRequest(db.getBulkOperations);
-export const getLegalDocuments = handleRequest(db.getLegalDocuments);
-export const getApiKeyAnalytics = handleRequest(db.getApiKeyAnalytics);
-export const getSystemLogs = handleRequest(db.getSystemLogs);
-export const getPredictiveAnalyticsData = handleRequest(
-  db.getPredictiveAnalyticsData
-);
-export const getCohortAnalysisData = handleRequest(db.getCohortAnalysisData);
-export const getProviderFinanceDashboardData = handleRequest(
-  db.getProviderFinanceDashboardData
-);
-
-export const saveMultiTenancySettings: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
-  try {
-    const updatedSettings = await db.saveMultiTenancySettings(req.body);
-    res.status(200).json(updatedSettings);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const saveBackupConfig: RequestHandler = async (req, res, next) => {
-  try {
-    const updatedConfig = await db.saveBackupConfig(req.body);
-    res.status(200).json(updatedConfig);
-  } catch (error) {
-    next(error);
-  }
-};
+export const getNotifications = handleGet(db.getNotifications);
+export const getProducts = handleGet(db.getProducts);
 
 // Marketing Tools
-export const getMarketingCampaigns = handleRequest(db.getMarketingCampaigns);
-export const addMarketingCampaign: RequestHandler = async (req, res, next) => {
-  try {
-    const newCampaign = await db.addMarketingCampaign(req.body);
-    res.status(201).json(newCampaign);
-  } catch (error) {
-    next(error);
-  }
-};
-export const deleteMarketingCampaign: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
-  try {
-    await db.deleteMarketingCampaign(req.params.id);
-    res.status(204).send();
-  } catch (error) {
-    next(error);
-  }
-};
-export const getMarketingAnalytics = handleRequest(db.getMarketingAnalytics);
+export const getMarketingCampaigns = handleGet(db.getMarketingCampaigns);
+export const addMarketingCampaign = handlePost(db.addMarketingCampaign);
+export const deleteMarketingCampaign = handleDelete(db.deleteMarketingCampaign);
+export const getMarketingAnalytics = handleGet(db.getMarketingAnalytics);
 
 // Data Studio
-export const getDataConnectors = handleRequest(db.getDataConnectors);
+export const getDataConnectors = handleGet(db.getDataConnectors);
 export const getConnectorSchema: RequestHandler = async (req, res, next) => {
   try {
     const type = req.query.type as string;
@@ -142,15 +132,36 @@ export const getConnectorSchema: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
-export const addConnector: RequestHandler = async (req, res, next) => {
-  try {
-    const newConnector = await db.addConnector(req.body);
-    res.status(201).json(newConnector);
-  } catch (error) {
-    next(error);
-  }
-};
+export const addConnector = handlePost(db.addConnector);
 
+// System Settings
+export const getAuditLogs = handleGet(db.getAuditLogs);
+export const getSecurityRoles = handleGet(db.getSecurityRoles);
+export const getApiKeys = handleGet(db.getApiKeys);
+export const getBackups = handleGet(db.getBackups);
+export const getIntegrations = handleGet(db.getIntegrations);
+export const getMultiTenancySettings = handleGet(db.getMultiTenancySettings);
+export const getBackupConfig = handleGet(db.getBackupConfig);
+export const getBulkOperations = handleGet(db.getBulkOperations);
+export const getLegalDocuments = handleGet(db.getLegalDocuments);
+export const getApiKeyAnalytics = handleGet(db.getApiKeyAnalytics);
+export const getSystemLogs = handleGet(db.getSystemLogs);
+export const saveMultiTenancySettings = handlePost(
+  db.saveMultiTenancySettings,
+  200
+);
+export const saveBackupConfig = handlePost(db.saveBackupConfig, 200);
+
+// Provider Analytics
+export const getPredictiveAnalyticsData = handleGet(
+  db.getPredictiveAnalyticsData
+);
+export const getCohortAnalysisData = handleGet(db.getCohortAnalysisData);
+export const getProviderFinanceDashboardData = handleGet(
+  db.getProviderFinanceDashboardData
+);
+
+// --- AI-related Data Endpoints ---
 export const getAiFeedback: RequestHandler = async (req, res, next) => {
   try {
     const { studentName, assignmentTitle, score, maxPoints } = req.body;
@@ -167,25 +178,9 @@ export const getAiFeedback: RequestHandler = async (req, res, next) => {
 };
 
 // Lesson Planner Handlers
-export const getLessonPlans = handleRequest(db.getLessonPlans);
-
-export const saveLessonPlan: RequestHandler = async (req, res, next) => {
-  try {
-    const savedPlan = await db.saveLessonPlan(req.body);
-    res.status(201).json(savedPlan);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const deleteLessonPlan: RequestHandler = async (req, res, next) => {
-  try {
-    await db.deleteLessonPlan(req.params.id);
-    res.status(204).send();
-  } catch (error) {
-    next(error);
-  }
-};
+export const getLessonPlans = handleGet(db.getLessonPlans);
+export const saveLessonPlan = handlePost(db.saveLessonPlan);
+export const deleteLessonPlan = handleDelete(db.deleteLessonPlan);
 
 export const getAiLessonPlan: RequestHandler = async (req, res, next) => {
   try {
@@ -215,37 +210,25 @@ export const getAiLessonPlan: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const getStudioDesignTemplates = handleRequest(
-  db.getStudioDesignTemplates
-);
-export const getStudioBrandKits = handleRequest(db.getStudioBrandKits);
-export const getStudioVideoProjects = handleRequest(db.getStudioVideoProjects);
-export const getStudioCodeProjects = handleRequest(db.getStudioCodeProjects);
-export const getStudioOfficeDocs = handleRequest(db.getStudioOfficeDocs);
-export const getStudioMarketplaceAssets = handleRequest(
+// Studio Data
+export const getStudioDesignTemplates = handleGet(db.getStudioDesignTemplates);
+export const getStudioBrandKits = handleGet(db.getStudioBrandKits);
+export const getStudioVideoProjects = handleGet(db.getStudioVideoProjects);
+export const getStudioCodeProjects = handleGet(db.getStudioCodeProjects);
+export const getStudioOfficeDocs = handleGet(db.getStudioOfficeDocs);
+export const getStudioMarketplaceAssets = handleGet(
   db.getStudioMarketplaceAssets
 );
 
 // CRM Controllers
-export const getCrmLeads = handleRequest(db.getCrmLeads);
-export const getCrmDeals = handleRequest(db.getCrmDeals);
-export const getCrmAnalytics = handleRequest(db.getCrmAnalytics);
-export const saveCrmLead: RequestHandler = async (req, res, next) => {
-  try {
-    const savedLead = await db.saveCrmLead(req.body);
-    res.status(savedLead.id === req.body.id ? 200 : 201).json(savedLead);
-  } catch (error) {
-    next(error);
-  }
-};
-export const deleteCrmLead: RequestHandler = async (req, res, next) => {
-  try {
-    await db.deleteCrmLead(req.params.id);
-    res.status(204).send();
-  } catch (error) {
-    next(error);
-  }
-};
+export const getCrmLeads = handleGet(db.getCrmLeads);
+export const getCrmDeals = handleGet(db.getCrmDeals);
+export const getCrmAnalytics = handleGet(db.getCrmAnalytics);
+export const saveCrmLead = handlePost(async (body) => {
+  const savedLead = await db.saveCrmLead(body);
+  return { status: savedLead.id === body.id ? 200 : 201, body: savedLead };
+});
+export const deleteCrmLead = handleDelete(db.deleteCrmLead);
 export const updateCrmDealStage: RequestHandler = async (req, res, next) => {
   try {
     const { dealId, newStage } = req.body;

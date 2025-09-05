@@ -1,9 +1,9 @@
-import express, { Express } from 'express';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import apiRouter from './api/routes';
-import { errorHandler } from './api/middlewares/errorHandler';
-import { initializeVectorStore } from './core/ai/rag/ingestion.service';
+import express, { Express, RequestHandler, ErrorRequestHandler } from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import apiRouter from "./api/routes";
+import { errorHandler } from "./api/middlewares/errorHandler";
+import { initializeVectorStore } from "./core/ai/rag/ingestion.service";
 
 const app: Express = express();
 
@@ -11,27 +11,30 @@ const app: Express = express();
 initializeVectorStore().catch(console.error);
 
 // Middleware
-app.use(cors({
-    // In a real app, this would be a more restrictive list of origins
-    origin: true, 
+const allowedOrigin =
+  process.env.FRONTEND_ORIGIN ||
+  process.env.VITE_DEV_ORIGIN ||
+  "http://localhost:5173";
+app.use(
+  cors({
+    origin: process.env.NODE_ENV === "production" ? allowedOrigin : true,
     credentials: true,
-}));
-// FIX: Cast middleware to any to resolve overload errors.
-app.use(express.json() as any);
-// FIX: Cast middleware to any to resolve overload errors.
-app.use(cookieParser() as any);
+  })
+);
+// Middleware
+app.use(express.json() as RequestHandler);
+app.use(cookieParser() as RequestHandler);
 
 // API Routes
-// FIX: Cast middleware to any to resolve overload errors.
-app.use('/api', apiRouter as any);
+// API Routes
+app.use("/api", apiRouter as RequestHandler);
 
 // Health Check
-app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'ok' });
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
 });
 
-// Error Handling Middleware
-// FIX: Cast middleware to any to resolve overload errors.
-app.use(errorHandler as any);
+// Error Handling Middleware: use the appropriate ErrorRequestHandler type directly
+app.use(errorHandler as ErrorRequestHandler);
 
 export default app;

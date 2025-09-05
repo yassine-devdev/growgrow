@@ -20,11 +20,10 @@ const splitTextIntoChunks = (
 
 // Define all documents to be ingested into the vector store
 // FIX: Replaced `__dirname` with `process.cwd()` to build a robust absolute path from the project root.
+// Resolve docs relative to this file to avoid depending on process.cwd()
 const DOC_PATHS = [
-  // FIX: Cast `process` to `any` to resolve TypeScript error 'Property 'cwd' does not exist on type 'Process''.
-  path.join((process as any).cwd(), "backend/src/docs/ABOUT_GROW_YOUR_NEED.md"),
-  // FIX: Cast `process` to `any` to resolve TypeScript error 'Property 'cwd' does not exist on type 'Process''.
-  path.join((process as any).cwd(), "backend/src/docs/FEATURES.md"),
+  path.resolve(__dirname, "../../../docs/ABOUT_GROW_YOUR_NEED.md"),
+  path.resolve(__dirname, "../../../docs/FEATURES.md"),
 ];
 
 export const initializeVectorStore = async (): Promise<void> => {
@@ -37,9 +36,17 @@ export const initializeVectorStore = async (): Promise<void> => {
     paths: DOC_PATHS,
   });
   try {
-    const ai = new GoogleGenAI({ apiKey: config.apiKey });
-    // Although the guidelines may focus on generative models,
-    // text-embedding-004 is the correct model for this task.
+    // Prefer provider-specific key (GEMINI_API_KEY) but fall back to generic API_KEY
+    const apiKey = config.geminiApiKey || config.apiKey;
+    if (!apiKey) {
+      logger.info(
+        "No Gemini/API key found in config — skipping vector ingestion."
+      );
+      return;
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
+    // model used for embeddings — may need adjustment depending on the provider/version
     const embeddingModel = "text-embedding-004";
 
     const allVectors: Vector[] = [];
@@ -50,17 +57,36 @@ export const initializeVectorStore = async (): Promise<void> => {
       const chunks = splitTextIntoChunks(documentText);
 
       for (const chunk of chunks) {
-        const response = await ai.models.embedContent({
-          model: embeddingModel,
-          contents: [chunk],
-        });
-        const embedding =
-          response &&
-          response.embeddings &&
-          response.embeddings[0] &&
-          Array.isArray(response.embeddings[0].values)
-            ? response.embeddings[0].values
-            : [];
+        let embedding: number[] = [];
+        try {
+          const response = await ai.models.embedContent({
+            model: embeddingModel,
+            contents: [chunk],
+          });
+
+          if (
+            response &&
+            Array.isArray(response.embeddings) &&
+            response.embeddings[0] &&
+            Array.isArray(response.embeddings[0].values)
+          ) {
+            embedding = response.embeddings[0].values as number[];
+          } else {
+            logger.info(
+              "Embedding response missing values for a chunk; skipping this chunk.",
+              {
+                doc: path.basename(docPath),
+              }
+            );
+          }
+        } catch (embedErr) {
+          const embedError =
+            embedErr instanceof Error ? embedErr : new Error(String(embedErr));
+          logger.error("Embedding call failed for a chunk:", {
+            message: embedError.message,
+            stack: embedError.stack,
+          });
+        }
         allVectors.push({
           content: chunk,
           embedding,
@@ -73,11 +99,11 @@ export const initializeVectorStore = async (): Promise<void> => {
       `Vector store initialized successfully with ${vectorService.count()} vectors.`
     );
   } catch (error) {
-    // logger.error expects object or string; ensure unknown is handled safely
-    logger.error(
-      "Failed to initialize vector store:",
-      (error as any) ?? String(error)
-    );
+    const err = error instanceof Error ? error : new Error(String(error));
+    logger.error("Failed to initialize vector store:", {
+      message: err.message,
+      stack: err.stack,
+    });
     // In a real app, you might want to retry or exit if this fails
   }
 };

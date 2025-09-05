@@ -16,7 +16,7 @@ Navigate into the `backend` directory and install the dependencies:
 
 ```bash
 cd backend
-npm install
+pnpm install
 ```
 
 ### 2. Environment Variables

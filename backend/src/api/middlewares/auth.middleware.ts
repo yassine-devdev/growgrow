@@ -4,6 +4,13 @@ import config from "../../config";
 import { Role } from "types";
 
 /**
+ * The shape of the user object attached to the request by the `authenticate` middleware.
+ */
+export interface AuthenticatedUser {
+  id: string;
+  role: Role;
+}
+/**
  * Middleware to authenticate requests by verifying the JWT from cookies.
  * Attaches the decoded user payload to `req.user`.
  */
@@ -16,10 +23,7 @@ export const authenticate: RequestHandler = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, config.jwt.secret) as {
-      id: string;
-      role: Role;
-    };
+    const decoded = jwt.verify(token, config.jwt.secret) as AuthenticatedUser;
     req.user = decoded;
     next();
   } catch (error) {
@@ -32,28 +36,39 @@ export const authenticate: RequestHandler = (req, res, next) => {
 };
 
 /**
+ * A predicate function for custom authorization logic.
+ * @param user The authenticated user object from the request.
+ * @returns `true` if the user is authorized, otherwise `false`.
+ */
+type PermissionCheck = (user: AuthenticatedUser) => boolean;
+
+/**
  * Middleware factory to authorize requests based on user roles.
  * Must be used after the `authenticate` middleware.
- * @param allowedRoles - A list of roles that are permitted to access the route.
+ * @param ...args - Either a list of allowed roles (e.g., 'Admin', 'Teacher')
+ * or a single custom permission check function.
  */
-export const permit = (...allowedRoles: Role[]): RequestHandler => {
+export const permit = (...args: Role[] | [PermissionCheck]): RequestHandler => {
   return (req, res, next) => {
-    if (!req.user || !req.user.role) {
+    const user = req.user as AuthenticatedUser | undefined;
+    if (!user) {
       return res
         .status(403)
         .json({ message: "Forbidden: User role not found." });
     }
 
-    const { role } = req.user;
-    if (allowedRoles.length > 0 && allowedRoles.includes(role)) {
-      next();
+    const isAuthorized =
+      typeof args[0] === "function"
+        ? (args[0] as PermissionCheck)(user)
+        : (args as Role[]).includes(user.role);
+
+    if (isAuthorized) {
+      return next();
     } else {
-      res
-        .status(403)
-        .json({
-          message:
-            "Forbidden: You do not have permission to access this resource.",
-        });
+      return res.status(403).json({
+        message:
+          "Forbidden: You do not have permission to access this resource.",
+      });
     }
   };
 };
