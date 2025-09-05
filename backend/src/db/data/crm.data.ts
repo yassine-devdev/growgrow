@@ -13,7 +13,7 @@ interface PaginatedQuery {
   pageSize?: string;
   search?: string;
   range?: string;
-  [key: string]: string | undefined;
+  [key: string]: any;
 }
 
 let mockCrmLeads: CrmLead[] = [

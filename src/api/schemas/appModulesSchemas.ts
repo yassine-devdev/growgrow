@@ -214,7 +214,7 @@ export type AuthSettings = z.infer<typeof authSettingsSchema>;
 export const securityRoleSchema = z.object({
     id: z.string(),
     name: z.string(),
-    permissions: z.number(),
+    permissions: z.string(),
 });
 export type SecurityRole = z.infer<typeof securityRoleSchema>;
 export const apiKeySchema = z.object({

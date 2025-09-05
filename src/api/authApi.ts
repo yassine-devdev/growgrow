@@ -14,12 +14,11 @@ import type {
  * @param data The user's registration details.
  * @returns A promise that resolves with a success message and a mock user ID.
  */
-export const signUpUser = async (data: SignUpFormData): Promise<{ success: boolean; userId: string; message: string }> => {
-    console.log("Signing up user:", data);
-    // Simulate API call
-    await new Promise(res => setTimeout(res, 1000));
-    // In a real app, the backend would create the user and send an OTP.
-    return { success: true, userId: 'temp-user-id', message: "Sign up successful, please verify your phone." };
+export const signUpUser = async (data: SignUpFormData): Promise<{ user: User }> => {
+    return apiClient<{ user: User }>('/auth/signup', {
+        method: 'POST',
+        body: JSON.stringify(data)
+    });
 };
 
 /**

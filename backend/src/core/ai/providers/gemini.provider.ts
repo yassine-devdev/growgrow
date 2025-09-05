@@ -6,7 +6,7 @@ import logger from "../../../utils/logger";
 // Shape we expect from the GenAI streaming chunks. Keep it narrow and explicit.
 type GenAIChunk = {
   text?: string;
-  // keep only expected properties to avoid unsafe indexing
+  [key: string]: unknown; // Retaining the index signature for compatibility
 };
 
 const toSerializable = (err: unknown): object => {
@@ -21,12 +21,10 @@ export class GeminiProvider implements IAIProvider {
   private ai: GoogleGenAI;
 
   constructor() {
-    if (!config.geminiApiKey) {
-      throw new Error(
-        "Gemini API key is not configured. Set GEMINI_API_KEY in environment."
-      );
+    if (!config.apiKey) {
+      throw new Error("Gemini API key is not configured.");
     }
-    this.ai = new GoogleGenAI({ apiKey: config.geminiApiKey });
+    this.ai = new GoogleGenAI({ apiKey: config.apiKey });
   }
 
   async generateStream(prompt: string): Promise<ReadableStream<string>> {
@@ -44,35 +42,20 @@ export class GeminiProvider implements IAIProvider {
     (async () => {
       const writer = transformStream.writable.getWriter();
       try {
-        const maybeIterable = await this.ai.models.generateContentStream({
+        const result = (await this.ai.models.generateContentStream({
           model: "gemini-2.5-flash",
           contents: prompt,
-        });
+        })) as AsyncIterable<GenAIChunk>;
 
-        // The SDK may return an async iterable or a different shape; guard at runtime.
-        if (
-          maybeIterable == null ||
-          typeof (maybeIterable as AsyncIterable<GenAIChunk>)[
-            Symbol.asyncIterator
-          ] !== "function"
-        ) {
-          // Not iterable — log and finish gracefully
-          logger.error(
-            "Gemini.generateContentStream returned non-iterable response",
-            { responseType: typeof maybeIterable }
-          );
-        } else {
-          const result = maybeIterable as AsyncIterable<GenAIChunk>;
-          for await (const chunk of result) {
-            // Defensive runtime check to ensure chunk is shaped as expected
-            if (
-              chunk &&
-              typeof chunk.text === "string" &&
-              chunk.text.length > 0
-            ) {
-              // The writable side expects GenAIChunk (the transform handles extracting .text)
-              await writer.write(chunk);
-            }
+        for await (const chunk of result) {
+          // Defensive runtime check to ensure chunk is shaped as expected
+          if (
+            chunk &&
+            typeof chunk.text === "string" &&
+            chunk.text.length > 0
+          ) {
+            // The writable side expects GenAIChunk (the transform handles extracting .text)
+            await writer.write(chunk);
           }
         }
       } catch (err: unknown) {

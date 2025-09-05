@@ -1,18 +1,18 @@
 import { RequestHandler } from "express";
-import { authenticateUser } from "../../services/auth.service";
+import { generateTokenAndUser } from "../../services/auth.service";
+import { Role } from "types";
 
 export const loginController: RequestHandler = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    // The role is guaranteed to be valid due to the validation middleware
+    const { role } = req.body as { role: Role };
 
-    const { token, user } = await authenticateUser(email, password);
+    const { token, user } = await generateTokenAndUser(role);
 
-    const isProd = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
       httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? "strict" : "lax",
-      domain: isProd ? undefined : "localhost",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 

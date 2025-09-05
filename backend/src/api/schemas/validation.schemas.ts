@@ -1,24 +1,14 @@
 import { z } from "zod";
-
-// Avoid importing frontend ES modules from backend runtime (package.json uses "type": "module").
-// Define the small ROLES array locally to keep validation self-contained and runtime-safe.
-export const ROLES = [
-  "Provider",
-  "Admin",
-  "Teacher",
-  "Student",
-  "Parent",
-  "Admissions",
-  "Individual",
-] as const;
+import { ROLES } from "@/constants/navigation";
 
 /**
  * Schema for validating the login request body.
  */
 export const loginSchema = z.object({
   body: z.object({
-    email: z.string().email("Invalid email format."),
-    password: z.string().min(1, "Password cannot be empty."),
+    role: z.enum(ROLES as [string, ...string[]], {
+      message: "Invalid role specified.",
+    }),
   }),
 });
 
@@ -28,7 +18,7 @@ export const loginSchema = z.object({
 export const chatSchema = z.object({
   body: z.object({
     prompt: z.string().min(1, "Prompt cannot be empty."),
-    userRole: z.enum([...ROLES] as [string, ...string[]]),
+    userRole: z.enum(ROLES as [string, ...string[]]),
   }),
 });
 

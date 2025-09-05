@@ -2,39 +2,22 @@ interface LogData {
   timestamp: string;
   level: "INFO" | "ERROR";
   message: string;
-  meta?: Record<string, unknown>;
+  [key: string]: any;
 }
-
-const safeSerialize = (obj: unknown): string => {
-  try {
-    return JSON.stringify(obj);
-  } catch (_e) {
-    const seen = new WeakSet<object>();
-    return JSON.stringify(obj, function (_key, val) {
-      if (val && typeof val === "object") {
-        if (seen.has(val as object)) return "[Circular]";
-        seen.add(val as object);
-      }
-      if (typeof val === "bigint") return (val as bigint).toString();
-      return val;
-    });
-  }
-};
 
 const log = (
   level: "INFO" | "ERROR",
   message: string,
-  meta: Record<string, unknown> = {}
+  meta: Record<string, any> = {}
 ) => {
   const logObject: LogData = {
     timestamp: new Date().toISOString(),
     level,
     message,
-    meta,
+    ...meta,
   };
-  const output = safeSerialize(logObject);
+  const output = JSON.stringify(logObject);
   if (level === "ERROR") {
-    // In production you'd forward this to a log service
     console.error(output);
   } else {
     console.log(output);
@@ -42,10 +25,10 @@ const log = (
 };
 
 const logger = {
-  info: (message: string, meta: Record<string, unknown> = {}) => {
+  info: (message: string, meta?: object) => {
     log("INFO", message, meta);
   },
-  error: (message: string, meta: Record<string, unknown> = {}) => {
+  error: (message: string, meta?: object) => {
     log("ERROR", message, meta);
   },
 };

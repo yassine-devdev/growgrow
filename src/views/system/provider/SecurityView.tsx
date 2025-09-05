@@ -96,24 +96,26 @@ const RolesPermissionsView: React.FC = () => {
   );
 
   return (
-    <DataTable
-      onRowClick={handleRowClick}
-      data={data?.rows ?? []}
-      columns={columns}
-      pageCount={data?.pageCount ?? 0}
-      pagination={pagination}
-      setPagination={setPagination}
-      sorting={sorting}
-      setSorting={setSorting}
-      globalFilter={globalFilter}
-      setGlobalFilter={setGlobalFilter}
-      isLoading={isLoading}
+    <>
+      <DataTable
+        onRowClick={handleRowClick}
+        data={data?.rows ?? []}
+        columns={columns}
+        pageCount={data?.pageCount ?? 0}
+        pagination={pagination}
+        setPagination={setPagination}
+        sorting={sorting}
+        setSorting={setSorting}
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        isLoading={isLoading}
+      />
       <RoleDetailsModal
         role={selectedRole}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-    />
+    </>
   );
 };
 
